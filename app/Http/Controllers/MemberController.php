@@ -34,8 +34,8 @@ class MemberController extends Controller
             'name_mei'=>'required|max:20',
             'nickname'=>'required|max:10',
             'gender'=>'required|in:1,2',
-            'password'=>'required|alpha_num|min:8|max:20|confirmed',
-            'email'=>'required|email|max:200|unique:members,email,' . $userId
+            'password'=>'required|alpha_num|min:8|max:20|confirmed|regex:/^[a-zA-Z0-9]+$/',
+            'email'=>'required|email|max:200|unique:members,email,' . $userId . '|regex:/^[a-zA-Z0-9]+$/',
         ];
         
         $validator=Validator::make($input,$validatorRules);
