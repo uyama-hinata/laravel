@@ -29,7 +29,7 @@ class ThanksMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Mail',
+            subject: '会員登録完了のお知らせ',
         );
     }
 
