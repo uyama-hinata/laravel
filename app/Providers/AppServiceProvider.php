@@ -22,5 +22,6 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         $url->forceScheme('https'); 
+        \Illuminate\Support\Facades\Schema::defaultStringLength(191);
     }
 }
