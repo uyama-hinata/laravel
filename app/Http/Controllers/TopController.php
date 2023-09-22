@@ -32,21 +32,13 @@ class TopController extends Controller
             'user'=>$user
         ]);
         
-        // ログアウト画面へ
-        if($request->has('toLogout_btn')){
-            
-            Auth::guard('web')->logout();
-            // セッションを無効化
-            $request->session()->invalidate();
-            $request->session()->regenerateToken();
-            return redirect()->route('topLogout');
-        }
     }
     /**
      * トップ（ログアウト）画面を表示する
      */
     public function topLogout(Request $request)
     {
+
         return view('user.topLogout');
 
         // 新規会員登録へ

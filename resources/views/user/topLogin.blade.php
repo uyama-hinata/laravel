@@ -15,7 +15,10 @@
             {{$user->name_sei}} {{$user->name_mei}}
             @endif
             様</div>
-        <a href="{{route('topLogout')}}" name="toLogout_btn">ログアウト</a>
+        <form action="{{route('logout')}}" method="POST">
+            @csrf
+        <input type="submit" value="ログアウト"/>
+        </form>
     </header>
     
 </body>
