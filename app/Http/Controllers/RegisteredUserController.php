@@ -4,16 +4,12 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\View\View;
 use App\Models\User;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\ThanksMail;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Support\Facades\Password;
+use App\Http\Controllers\Controller;
 use App\Rules\Hankaku;
+use App\Rules\Email;
+use Illuminate\Support\Facades\Auth;
 
 
 class RegisteredUserController extends Controller
@@ -22,7 +18,7 @@ class RegisteredUserController extends Controller
     /**
      * 会員登録画面を表示する
      */
-    public function userRegister(Request $request)
+    public function userRegister()
     {
         return view('user.register');
     }
@@ -39,7 +35,7 @@ class RegisteredUserController extends Controller
             'nickname'=>'required|max:10',
             'gender'=>'required|in:1,2',
             'password'=>['required','min:8','max:20','confirmed',new Hankaku()],
-            'email'=>'required|email|max:200|unique:users,email,'
+            'email'=>['required','email','max:200','unique:users','email',new Email()],
         ];
         
         $validator=Validator::make($input,$validatorRules);
@@ -96,6 +92,9 @@ class RegisteredUserController extends Controller
         $user->password=bcrypt($input['password']);
         $user->email=$input['email'];
         $user->save();
+
+         // 新しいユーザーをログインさせる
+         Auth::login($user);
 
         // 二重登録を防ぐ
         $request->session()->regenerateToken();

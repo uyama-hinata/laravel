@@ -5,13 +5,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
-use App\Models\User;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\ThanksMail;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Password;
 
 
@@ -23,7 +17,6 @@ class PasswordResetLinkController extends Controller
     public function passwordMail():View
     {
         return view('user.passwordMail');
-
     }
     /**
      * メール送信処理
@@ -43,7 +36,6 @@ class PasswordResetLinkController extends Controller
                     ? redirect()->route('sentMail')
                     : back()->withInput($request->only('email'))
                             ->withErrors(['email' => __($status)]);
-        
     }
     /**
      * メール送信完了画面を表示する
@@ -51,7 +43,6 @@ class PasswordResetLinkController extends Controller
     public function sentMail():View
     {
         return view('user.sentMail');
-
     }
 }
 ?>

@@ -4,13 +4,8 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Support\Facades\Password;
 use App\Http\Requests\Auth\LoginRequest;
-use Illuminate\Http\Request;
+
 
 class LoginController extends Controller
 {

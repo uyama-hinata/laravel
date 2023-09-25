@@ -4,59 +4,101 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
-use App\Http\Controllers\Auth\NewPasswordController;
-use App\Http\Controllers\Auth\PasswordController;
-use App\Http\Controllers\Auth\PasswordResetLinkController;
-use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\Auth\PasswordController;
+use App\Http\Controllers\Auth\NewPasswordController;
+use App\Http\Controllers\PasswordResetLinkController;
+use App\Http\Controllers\RegisteredUserController;
+use App\Http\Controllers\RegisterThanksController;
+use App\Http\Controllers\TopController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LogoutController;
 use Illuminate\Support\Facades\Route;
 
+
+
 Route::middleware('guest')->group(function () {
+    // // 会員登録画面を表示
+    // Route::get('register', [RegisteredUserController::class, 'create'])
+    //             ->name('register');
+
+    // // データを受け渡す
+    // Route::post('register', [RegisteredUserController::class, 'store'])
+    //             ->name('postRegist');
+
+    // Route::get('login', [AuthenticatedSessionController::class, 'create'])
+    //             ->name('login');
+
+    // Route::post('login', [AuthenticatedSessionController::class, 'store']);
+
+    // Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
+    //             ->name('password.request');
+
+    // Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])
+    //             ->name('password.email');
+
+    
     // 会員登録画面を表示
-    Route::get('register', [RegisteredUserController::class, 'create'])
-                ->name('register');
-
+    Route::get('register', [RegisteredUserController::class, 'userRegister'])->name('userRegister');
     // データを受け渡す
-    Route::post('register', [RegisteredUserController::class, 'store'])
-                ->name('postRegist');
+    Route::post('register', [RegisteredUserController::class, 'postData'])->name('postData');
+    // 確認画面を表示
+    Route::get('confirm', [RegisteredUserController::class, 'confirm'])->name('confirm');
+    // 登録
+    Route::post('confirm', [RegisteredUserController::class, 'exeRegist'])->name('exeRegist');
 
-    Route::get('login', [AuthenticatedSessionController::class, 'create'])
-                ->name('login');
+    // 完了画面を表示・メール送信
+    Route::get('thanks', [RegisterThanksController::class, 'thanks'])->name('thanks');
+    
 
-    Route::post('login', [AuthenticatedSessionController::class, 'store']);
+    //パスワード再設定画面を表示する
+    Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])->name('password.reset');   
+    //パスワード再設定処理
+    Route::post('reset-password', [NewPasswordController::class, 'store'])->name('password.store');
 
-    Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
-                ->name('password.request');
+    //メール入力画面を表示する
+    Route::get('passwordMail', [PasswordResetLinkController::class, 'passwordMail'])->name('passwordMail');
+    //メール送信処理
+    Route::post('passwordMail', [PasswordResetLinkController::class, 'sendMail'])->name('sendMail');
+    //メール送信完了画面を表示する
+    Route::get('sentMail', [PasswordResetLinkController::class, 'sentMail'])->name('sentMail');
 
-    Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])
-                ->name('password.email');
-
-    Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])
-                ->name('password.reset');
-
-    Route::post('reset-password', [NewPasswordController::class, 'store'])
-                ->name('password.store');
+    //トップ画面（ログアウト時）を表示
+    Route::get('topLogout', [TopController::class, 'topLogout'])->name('topLogout');
+                
+    //ログイン画面を表示
+    Route::get('Login', [LoginController::class, 'Login'])->name('Login');
+    //ログイン処理
+    Route::post('Login', [LoginController::class, 'postLogin'])->name('postLogin');
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('verify-email', EmailVerificationPromptController::class)
-                ->name('verification.notice');
 
-    Route::get('verify-email/{id}/{hash}', VerifyEmailController::class)
-                ->middleware(['signed', 'throttle:6,1'])
-                ->name('verification.verify');
+    // Route::get('verify-email', EmailVerificationPromptController::class)
+    //             ->name('verification.notice');
 
-    Route::post('email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
-                ->middleware('throttle:6,1')
-                ->name('verification.send');
+    // Route::get('verify-email/{id}/{hash}', VerifyEmailController::class)
+    //             ->middleware(['signed', 'throttle:6,1'])
+    //             ->name('verification.verify');
 
-    Route::get('confirm-password', [ConfirmablePasswordController::class, 'show'])
-                ->name('password.confirm');
+    // Route::post('email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
+    //             ->middleware('throttle:6,1')
+    //             ->name('verification.send');
 
-    Route::post('confirm-password', [ConfirmablePasswordController::class, 'store']);
+    // Route::get('confirm-password', [ConfirmablePasswordController::class, 'show'])
+    //             ->name('password.confirm');
 
-    Route::put('password', [PasswordController::class, 'update'])->name('password.update');
+    // Route::post('confirm-password', [ConfirmablePasswordController::class, 'store']);
 
-    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
-                ->name('logout');
+    // Route::put('password', [PasswordController::class, 'update'])->name('password.update');
+
+    // Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
+    //              ->name('logout');
+    
+    
+    //トップ画面（ログイン時）を表示
+    Route::get('topLogin', [TopController::class, 'topLogin'])->name('topLogin');
+    // ログアウト処理
+    Route::post('topLogin', [LogoutController::class, 'destroy'])->name('logout');
+                 
 });
