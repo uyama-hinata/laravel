@@ -105,6 +105,9 @@ class RegisteredUserController extends Controller
         $user->email=$input['email'];
         $user->save();
 
+        // 新しいユーザーをログインさせる
+        Auth::login($user);
+
         // 二重登録を防ぐ
         $request->session()->regenerateToken();
 

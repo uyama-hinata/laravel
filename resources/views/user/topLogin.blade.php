@@ -9,15 +9,13 @@
     <header>
         <div class="header_msg">
             ようこそ　
-            @if(session('name_sei') && session('name_mei'))
-            {{session('name_sei')}} {{session('name_mei')}}
-            @elseif($user)
+            @if($user)
             {{$user->name_sei}} {{$user->name_mei}}
             @endif
             様</div>
         <form action="{{route('logout')}}" method="POST">
             @csrf
-        <input type="submit" value="ログアウト"/>
+        <input type="submit" value="ログアウト" class="logout-button"/>
         </form>
     </header>
     

@@ -4,15 +4,10 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\View\View;
-use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ThanksMail;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Support\Facades\Password;
+
+
 
 class RegisterThanksController extends Controller
 {
@@ -29,21 +24,9 @@ class RegisterThanksController extends Controller
 
         return view('user.thanks');
 
-    }
-    /**
-     * データを渡す
-     */
-    public function postThanks(Request $request)
-    {
-        $input=$request->session()->get('register_input');
-
         // トップに戻る
         if($request->has('btn_back')){
-            return redirect()->route('topLogin')
-            ->with([
-                'name_sei'=>$input['name_sei'],
-                'name_mei'=>$input['name_mei']
-            ]);
+            return redirect()->route('topLogin');
         }
     }
 }
