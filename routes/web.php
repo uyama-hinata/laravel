@@ -49,15 +49,19 @@ Route::get('/Login', [LoginController::class, 'Login'])->name('Login');
 Route::post('/Login', [LoginController::class, 'postLogin'])->name('postLogin');
 
 
-//メール入力画面を表示する
+//メール入力画面を表示
 Route::get('/passwordMail', [PasswordResetLinkController::class, 'passwordMail'])->name('passwordMail');
 //メール送信処理
 Route::post('/passwordMail', [PasswordResetLinkController::class, 'sendMail'])->name('sendMail');
-//メール送信完了画面を表示する
+//メール送信完了画面を表示
 Route::get('/sentMail', [PasswordResetLinkController::class, 'sentMail'])->name('sentMail');
 
 
-// //パスワード再設定画面を表示する
-// Route::get('/resetPass/{token}', [NewPasswordController::class, 'create'])->name('createe');
-// //パスワード再設定処理
-// Route::post('/resetPass', [NewPasswordController::class, 'store'])->name('newPass');
+// 商品登録画面を表示
+route::get('/productRegister', [RegisteredProductController::class, 'productRegister'])->name('productRegister');
+// データを受け渡す
+Route::post('/productRegister', [RegisteredProductController::class, 'postProduct'])->name('postProduct');
+// 確認画面を表示
+Route::get('/productConfirm', [RegisteredProductController::class, 'productConfirm'])->name('productConfirm');
+// 登録
+Route::post('/productConfirm', [RegisteredProductController::class, 'exeProduct'])->name('exeProduct');
