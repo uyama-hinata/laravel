@@ -4,15 +4,9 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\View\View;
-use App\Models\User;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\ThanksMail;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Support\Facades\Password;
+use App\Http\Controllers\Controller;
+
 
 
 class TopController extends Controller
@@ -24,11 +18,8 @@ class TopController extends Controller
     {
         // 現在のログインユーザーを取得
         $user= Auth::user();
-        // 新規会員登録から来たユーザー
-        $input=$request->session()->get('register_input');
-        
+       
         return view('user.topLogin',[
-            'input'=>$input,
             'user'=>$user
         ]);
         
@@ -39,8 +30,6 @@ class TopController extends Controller
     public function topLogout(Request $request)
     {
 
-        return view('user.topLogout');
-
         // 新規会員登録へ
         if($request->has('toRegist_btn')){
             return redirect()->route('userRegister');
@@ -50,6 +39,8 @@ class TopController extends Controller
         if($request->has('toLogin_btn')){
             return redirect()->route('Login');
         }
+
+        return view('user.topLogout');
     }
 }
 ?>

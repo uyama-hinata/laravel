@@ -1,13 +1,6 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RegisteredUserController;
-use App\Http\Controllers\RegisterThanksController;
-use App\Http\Controllers\TopController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\PasswordResetLinkController;
-use App\Http\Controllers\NewPasswordController;
+
 
 /*
 |--------------------------------------------------------------------------
