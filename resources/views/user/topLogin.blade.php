@@ -12,7 +12,15 @@
             @if($user)
             {{$user->name_sei}} {{$user->name_mei}}
             @endif
-            様</div>
+            様
+
+            <div class="status">
+                @if (session('status'))
+                {{session('status')}}
+                @endif
+            </div>
+            
+        </div>
         <form action="{{route('logout')}}" method="POST">
             @csrf
         <input type="submit" value="ログアウト" class="logout-button"/>

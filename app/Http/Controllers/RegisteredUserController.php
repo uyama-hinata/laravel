@@ -10,6 +10,8 @@ use App\Http\Controllers\Controller;
 use App\Rules\Hankaku;
 use App\Rules\Email;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ThanksMail;
 
 
 class RegisteredUserController extends Controller
@@ -92,6 +94,9 @@ class RegisteredUserController extends Controller
         $user->password=bcrypt($input['password']);
         $user->email=$input['email'];
         $user->save();
+
+         //メール送信    
+         Mail::to($input['email'])->send(new ThanksMail());
 
          // 新しいユーザーをログインさせる
          Auth::login($user);
