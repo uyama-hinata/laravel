@@ -44,12 +44,8 @@ Route::middleware('guest')->group(function () {
     Route::post('register', [RegisteredUserController::class, 'postData'])->name('postData');
     // 確認画面を表示
     Route::get('confirm', [RegisteredUserController::class, 'confirm'])->name('confirm');
-    // 登録
+    // 登録・メール送信
     Route::post('confirm', [RegisteredUserController::class, 'exeRegist'])->name('exeRegist');
-
-    // 完了画面を表示・メール送信
-    Route::get('thanks', [RegisterThanksController::class, 'thanks'])->name('thanks');
-    
 
     //パスワード再設定画面を表示する
     Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])->name('password.reset');   
@@ -94,7 +90,9 @@ Route::middleware('auth')->group(function () {
 
     // Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
     //              ->name('logout');
-    
+
+    // 完了画面を表示
+    Route::get('thanks', [RegisterThanksController::class, 'thanks'])->name('thanks');
     
     //トップ画面（ログイン時）を表示
     Route::get('topLogin', [TopController::class, 'topLogin'])->name('topLogin');

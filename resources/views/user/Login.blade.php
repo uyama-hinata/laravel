@@ -13,12 +13,6 @@
                 ログイン
             </div>
 
-            <div class="status">
-                @if (session('status'))
-                {{session('status')}}
-                @endif
-            </div>
-
             <div class="errors">
                 @if ($errors->any())
                 @foreach ($errors->all() as $error)
