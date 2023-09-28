@@ -23,7 +23,8 @@
         </div>
         <form action="{{route('logout')}}" method="POST">
             @csrf
-        <input type="submit" value="ログアウト" class="logout-button"/>
+            <a href="{{route('productRegister')}}" name="toRegist_btn">新規商品登録</a>
+            <input type="submit" value="ログアウト" class="logout-button"/>
         </form>
     </header>
     

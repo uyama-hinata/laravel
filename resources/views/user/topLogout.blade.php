@@ -10,8 +10,5 @@
         <a href="{{route('userRegister')}}" name="toRegist_btn">新規会員登録</a>
         <a href="{{route('Login')}}" name="toLogin_btn">ログイン</a>
     </header>
-    <main>
-        
-    </main>
 </body>
 </html>

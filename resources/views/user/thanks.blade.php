@@ -7,11 +7,9 @@
 </head>
 <body>
     <main>
-        
         <div class="form-title">会員登録完了</div>
         <div class="thank_msg"><p>会員登録が完了しました。</p></div>
-        <a href="{{route('topLogout')}}" name="toLogout_btn" class="toTop">トップに戻る</a>
-        
+        <a href="{{route('topLogin')}}" name="toLogin_btn" class="toTop">トップに戻る</a>
     </main>
 </body>
 </html>

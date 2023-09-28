@@ -17,7 +17,6 @@ class RegisterThanksController extends Controller
     {
 
         return view('user.thanks');
-    
     }
 }
 ?>
