@@ -3,15 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\View\View;
 use App\Models\Product;
 use App\Models\Product_category;
 use App\Models\Product_subcategory;
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 
 class RegisteredProductController extends Controller
 {

@@ -116,10 +116,6 @@
                         subcategorySelect.append(`<option value="${subcategory.id}">${subcategory.name}</option>`);
                     });
 
-                    // // エラー時にサブカテゴリを保持
-                    // if(oldSubcategory="{{old('product_subcategory_id')}}"){
-                    //     subcategorySelect.val(oldSubcategory);
-                    // }
                 });
             });
 

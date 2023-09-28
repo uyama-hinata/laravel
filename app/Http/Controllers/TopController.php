@@ -16,6 +16,9 @@ class TopController extends Controller
      */
     public function topLogin(Request $request)
     {
+        // セッションクリア
+        $request->session()->forget('uploaded_paths');
+        
         // 現在のログインユーザーを取得
         $user= Auth::user();
        
