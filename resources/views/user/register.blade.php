@@ -69,7 +69,7 @@
                 </p>
             </div>
             
-            <input type="submit" class="btn_next" value="確認画面"/>
+            <input type="submit" class="btn_next" value="確認画面へ"/>
             <a href="{{route('topLogout')}}" name="toLogout_btn" class="toTop">トップに戻る</a>
 
         </form>

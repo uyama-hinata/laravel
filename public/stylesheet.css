@@ -6,9 +6,9 @@ body {
 }
 
 main {
-    width: 60%;
+    max-width: 800px;
     background-color: #fff;
-    margin: 20px auto;
+    margin: 40px auto;
     padding: 40px;
     border-radius: 8px;
 }
@@ -16,17 +16,24 @@ main {
 .form-title {
     text-align: center;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 24px;
     margin-bottom: 30px;
 }
 
 .form-item{
-    margin-right: auto;
-    padding-left: 150px;
-    display:flex;
-    gap: 10px;
+    margin-bottom: 20px;
 }
 
+input[type="text"], 
+input[type="email"], 
+input[type="password"], 
+select, 
+textarea {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
 
 .errors {
     color: red;
@@ -34,12 +41,17 @@ main {
     text-align: center;
 }
 
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+}
+
 .status {
     color:rgb(102, 153, 25);
     font-size: 10px;
     text-align: center;
 }
-
 
 .btn_next,.btn_back {
     display: block;
@@ -53,24 +65,50 @@ main {
     width: 30%;
 }
 
+.btn_next {
+    background-color: #3490dc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
 .thank_msg{
     text-align: center;
 }
 
 header {
-    width: 80%;
+    padding: 10px 50px;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     justify-content: flex-end;
-    padding: 10px 20px;
+}
+
+.header_msg {
+    margin: 0;
+    margin-right: auto;
 }
 
 a, .logout-button{
-    margin-left: 20px;
-    padding: 5px 10px;
+    margin: 0 10px;
     text-decoration: none;
     color: white;
     background-color: #1e2b3a;
     border-radius: 5px;
+    display: inline-block;
+}
+
+a {
+    padding: 10px 20px;
+    font-size: 15px;
+}
+
+.logout-button{
+    padding: 9px 16px;
+    font-size: 14px;
 }
 
 .toPass{
@@ -99,7 +137,47 @@ a, .logout-button{
     text-align: center;
 }
 
-.header_msg {
-    text-align: left;
-    margin-right: 600px;
+.image {
+    flex-direction: column;
+}
+
+.form-item.image label {
+    display: block;    
+    margin-bottom: 10px;
+}
+
+.form-item.image .center {
+    margin-top: 10px;
+}
+
+.form-item.image .center label {
+    font-size: 16px;
+}
+
+.center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.center img {
+    max-width: 300px;
+    height: auto;
+}
+
+.center form {
+    width: 100%;
+}
+
+.center input[type="file"], .center button {
+    margin: 10px 0;
+}
+
+#upload1,#upload2,#upload3,#upload4 {
+    background-color: #e6c261; 
+    color: #FFF;              
+    padding: 2px 7px;       
+    border: none;            
+    border-radius: 5px;       
+    cursor: pointer;      
 }

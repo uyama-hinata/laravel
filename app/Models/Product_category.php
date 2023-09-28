@@ -16,4 +16,9 @@ class product_category extends Model
     [
         'name',
     ];
+
+    public function product_subcategories()
+    {
+        return $this->hasMany(Product_subcategory::class);
+    }
 }

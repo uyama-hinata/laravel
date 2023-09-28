@@ -23,11 +23,6 @@ class RegisterThanksController extends Controller
         Mail::to($input['email'])->send(new ThanksMail());
 
         return view('user.thanks');
-
-        // トップに戻る
-        if($request->has('btn_back')){
-            return redirect()->route('topLogin');
-        }
     }
 }
 ?>

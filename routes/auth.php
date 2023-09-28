@@ -13,16 +13,17 @@ use App\Http\Controllers\RegisterThanksController;
 use App\Http\Controllers\TopController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\RegisteredProductController;
 use Illuminate\Support\Facades\Route;
 
 
 
 Route::middleware('guest')->group(function () {
-    // // 会員登録画面を表示
+    
     // Route::get('register', [RegisteredUserController::class, 'create'])
     //             ->name('register');
 
-    // // データを受け渡す
+    
     // Route::post('register', [RegisteredUserController::class, 'store'])
     //             ->name('postRegist');
 
@@ -47,9 +48,7 @@ Route::middleware('guest')->group(function () {
     // 登録
     Route::post('confirm', [RegisteredUserController::class, 'exeRegist'])->name('exeRegist');
 
-    // 完了画面を表示・メール送信
-    Route::get('thanks', [RegisterThanksController::class, 'thanks'])->name('thanks');
-    
+   
 
     //パスワード再設定画面を表示する
     Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])->name('password.reset');   
@@ -70,6 +69,7 @@ Route::middleware('guest')->group(function () {
     Route::get('Login', [LoginController::class, 'Login'])->name('Login');
     //ログイン処理
     Route::post('Login', [LoginController::class, 'postLogin'])->name('postLogin');
+
 });
 
 Route::middleware('auth')->group(function () {
@@ -100,5 +100,22 @@ Route::middleware('auth')->group(function () {
     Route::get('topLogin', [TopController::class, 'topLogin'])->name('topLogin');
     // ログアウト処理
     Route::post('topLogin', [LogoutController::class, 'destroy'])->name('logout');
+
+    // 完了画面を表示・メール送信
+    Route::get('thanks', [RegisterThanksController::class, 'thanks'])->name('thanks');
+    
+
+    // 商品登録画面を表示
+    Route::get('product-register', [RegisteredProductController::class, 'productRegister'])->name('productRegister');
+    // サブカテゴリを取得
+    Route::get('product-register/{key}',[RegisteredProductController::class, 'getSub'])->name('getSub');
+    // 画像ファイルを保存、パスの取得
+    Route::post('upload',[RegisteredProductController::class, 'upload'])->name('upload');
+    // データを受け渡す
+    Route::post('product-register', [RegisteredProductController::class, 'postProduct'])->name('postProduct');
+    // 確認画面を表示
+    Route::get('product-confirm', [RegisteredProductController::class, 'productConfirm'])->name('productConfirm');
+    // 登録
+    Route::post('product-confirm', [RegisteredProductController::class, 'exeProduct'])->name('exeProduct');
                  
 });
