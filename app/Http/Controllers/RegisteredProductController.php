@@ -44,19 +44,32 @@ class RegisteredProductController extends Controller
         $paths=[];
 
         // productImagesディレクトリに画像を保存、パスの取得
-        if($request->hasFile('image_1')){
+        if($request->hasFile('image_1') ){
             $paths['path_1']=$request->file('image_1')->store('productImages','public');
-        }
-        if($request->hasFile('image_2')){
-            $paths['path_2']=$request->file('image_2')->store('productImages','public');
-        }
-        if($request->hasFile('image_3')){
-            $paths['path_3']=$request->file('image_3')->store('productImages','public');
-        }
-        if($request->hasFile('image_4')){
-            $paths['path_4']=$request->file('image_4')->store('productImages','public');
+        }elseif($request->session()->has('uploaded_paths.path_1')){
+            $paths['path_1']=$request->session()->get('uploaded_paths.path_1');
         }
 
+        if($request->hasFile('image_2')){
+            $paths['path_2']=$request->file('image_2')->store('productImages','public');
+        }elseif($request->session()->has('uploaded_paths.path_2')){
+            $paths['path_2']=$request->session()->get('uploaded_paths.path_2');
+        }
+
+        if($request->hasFile('image_3')){
+            $paths['path_3']=$request->file('image_3')->store('productImages','public');
+        }elseif($request->session()->has('uploaded_paths.path_3')){
+            $paths['path_3']=$request->session()->get('uploaded_paths.path_3');
+        }
+
+        if($request->hasFile('image_4')){
+            $paths['path_4']=$request->file('image_4')->store('productImages','public');
+        }elseif($request->session()->has('uploaded_paths.path_4')){
+            $paths['path_4']=$request->session()->get('uploaded_paths.path_4');
+        }
+
+        \Log::info($paths);
+    
         // セッションに入れる
         $request->session()->put('uploaded_paths',$paths);
 
@@ -79,6 +92,8 @@ class RegisteredProductController extends Controller
             'product_content'=>'required|max:500',
         ]);
 
+       
+
         // セッションに入れる
         $request->session()->put('register_input',$input);
         return redirect()->route('productConfirm');
@@ -90,7 +105,6 @@ class RegisteredProductController extends Controller
     public function productConfirm(Request $request)
     {
         $input=$request->session()->get('register_input');
-
 
         // カテゴリとサブカテゴリの名前を取得
         $categoryName=Product_category::find($input['product_category_id'])->name;
