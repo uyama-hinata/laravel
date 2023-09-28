@@ -115,34 +115,30 @@
                     data.forEach(function(subcategory){
                         subcategorySelect.append(`<option value="${subcategory.id}">${subcategory.name}</option>`);
                     });
-
-                    // // エラー時にサブカテゴリを保持
-                    // if(oldSubcategory="{{old('product_subcategory_id')}}"){
-                    //     subcategorySelect.val(oldSubcategory);
-                    // }
                 });
             });
 
             // 画像を保持
             document.getElementById("btn_next").onclick=function(){
+                
                 var image1Path="{{session('uploaded_paths.path_1')}}";
                 if(image1Path){
-                    document.getElementById('imageDisplay1').src='/storage/'+imagePath;
+                    document.getElementById('imageDisplay1').src='/storage/'+image1Path;
                 }
 
                 var image2Path="{{session('uploaded_paths.path_2')}}";
                 if(image2Path){
-                    document.getElementById('imageDisplay2').src='/storage/'+imagePath;
+                    document.getElementById('imageDisplay2').src='/storage/'+image2Path;
                 }
 
                 var image3Path="{{session('uploaded_paths.path_3')}}";
                 if(image3Path){
-                    document.getElementById('imageDisplay3').src='/storage/'+imagePath;
+                    document.getElementById('imageDisplay3').src='/storage/'+image3Path;
                 }
 
                 var image4Path="{{session('uploaded_paths.path_4')}}";
                 if(image4Path){
-                    document.getElementById('imageDisplay4').src='/storage/'+imagePath;
+                    document.getElementById('imageDisplay4').src='/storage/'+image4Path;
                 }
             }
 
