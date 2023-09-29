@@ -21,4 +21,13 @@ class product extends Model
         'image_4',
         'product_content',
     ];
+    // リレーション
+    public function product_category()
+    {
+        return $this->belongsTo(Product_category::class);
+    }
+    public function product_subcategory()
+    {
+        return $this->belongsTo(Product_subcategory::class);
+    }
 }

@@ -15,36 +15,66 @@
     </header>
     <main>
         <div class="search_box">
-            <form action="" method="get">
+            <form action="{{route('productList')}}" method="get">
                 @csrf
                 <span>カテゴリ</span>
-                    <select name="searvh_category" id="product_category_id">
+                    <select name="search_category" id="product_category_id">
                         <option value=""></option>
                         @foreach($categories as $category)
-                            <option value="{{$category->id}}" @if(old('product_category_id')==$category->id) selected @endif>{{ $category->name }}</option>
+                            <option value="{{$category->id}}" {{request('search_category')==$category->id ?  'selected' : ''}}>{{ $category->name }}</option>
                         @endforeach
                     </select>
-                    <select name="searvh__subcategory" id="product_subcategory_id">
-                        @if(!empty(old('product_subcategory_id')))
+                    <select name="search__subcategory" id="product_subcategory_id">
+                        <option value=""></option>
+                        @if(request('search__subcategory'))
                             @foreach($subcategories as $subcategory)
-                                @if($subcategory->product_category_id = old('product_category_id'))
-                                    <option value="{{$subcategory->id}}"{{(old('product_subcategory_id') == $subcategory->id) ? "selected" : ""}}>{{ $subcategory->name }}</option>
+                                @if($subcategory->product_category_id = request('search_category'))
+                                    <option value="{{$subcategory->id}}"{{request('search__subcategory')==$subcategory->id ?  'selected' : ''}}>{{ $subcategory->name }}</option>
                                 @endif
                             @endforeach 
                         @endif
                     </select>
                 <span>フリーワード</span>
-                    <input type="text" name="search_freeword" value="">
+                    <input type="text" name="search_freeword" value="{{request('search_freeword')}}">
                 <input type="submit" name="search_btn" class="search_btn" value="商品検索">
             </form>
-
-            <div class="show">
-                @foreach($products as $product)
-                    <img src="" alt="">
-
-                @endforeach
-            </div>
         </div>
+        <div class="show">
+            @foreach($products as $product)
+                <div class="show-item">
+                    <div class="show-images">
+                        @if(!empty($product->image_1))
+                            <img class="show_image" src="{{asset('storage/' . $product->image_1)}}">
+                        @endif
+                        @if(!empty($product->image_2))
+                            <img class="show_image" src="{{asset('storage/' . $product->image_2)}}">
+                        @endif
+                        @if(!empty($product->image_3))
+                            <img class="show_image" src="{{asset('storage/' . $product->image_3)}}">
+                        @endif
+                        @if(!empty($product->image_4))
+                            <img class="show_image" src="{{asset('storage/' . $product->image_4)}}">
+                        @endif
+                    </div>
+                    <div class="show-info">
+                        <div class="show-categories">
+                            <div class="show_category">{{$product->product_category->name}}</div>＞
+                            <div class="show_subcategory">{{$product->product_subcategory->name}}</div>
+                        </div>
+                        <div class="show_name">{{$product->name}}</div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+
+        <div class="page">{{$products->links('vendor.pagination.bootstrap-5')}}</div>
+
+        @auth
+            <a href="{{route('topLogin')}}" name="toLogin_btn" class="toTop">トップに戻る</a>
+        @endauth
+        @guest
+        <a href="{{route('topLogout')}}" name="toLogout_btn" class="toTop">トップに戻る</a>
+        @endguest
         
     </main>
     <script>

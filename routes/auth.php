@@ -74,7 +74,7 @@ Route::middleware('auth')->group(function () {
                  
 });
 
-// 商品一覧
+// 商品一覧を表示
 Route::get('product-list',[ProductListController::class,'productList'])->name('productList');
 // サブカテゴリを取得
 Route::get('product-register/{key}',[ProductListController::class, 'getSub'])->name('getSub');

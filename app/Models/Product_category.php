@@ -16,7 +16,7 @@ class product_category extends Model
     [
         'name',
     ];
-
+    // リレーション
     public function product_subcategories()
     {
         return $this->hasMany(Product_subcategory::class);

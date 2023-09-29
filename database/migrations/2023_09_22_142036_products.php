@@ -17,10 +17,10 @@ return new class extends Migration
             $table->integer('product_category_id');
             $table->integer('product_subcategory_id');
             $table->string('name',255);
-            $table->string('image_1')->nullable();
-            $table->string('image_2')->nullable();
-            $table->integer('image_3')->nullable();
-            $table->string('image_4')->nullable();
+            $table->string('image_1',255)->nullable();
+            $table->string('image_2',255)->nullable();
+            $table->string('image_3',255)->nullable();
+            $table->string('image_4',255)->nullable();
             $table->text('product_content');
             $table->timestamps();
             $table->softDeletes();

@@ -95,7 +95,16 @@
             </div>
 
             <input  type="submit" class="btn_next" value="確認画面へ" id="btn_next">
-            <a href="{{route('topLogin')}}" name="toLogin_btn" class="toTop">トップに戻る</a>
+
+            {{-- ログイン画面から来た人 --}}
+            @if(session('previous_page')=='login')
+                <a href="{{route('topLogin')}}" name="toLogin_btn" class="toTop">トップに戻る</a>
+            @endif
+            {{-- 一覧画面から来た人 --}}
+            @if(session('previous_page')=='list')
+                <a href="{{route('productList')}}" name="toList_btn" class="toTop">一覧に戻る</a>
+            @endif
+            
         </form>
     </main>
     <script>

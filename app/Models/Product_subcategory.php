@@ -16,7 +16,7 @@ class product_subcategory extends Model
     [
         'name',
     ];
-
+    // リレーション
     public function product_category()
     {
         return $this->belongsTo(Product_category::class);

@@ -151,7 +151,7 @@ class RegisteredProductController extends Controller
         // 二重登録を防ぐ
         $request->session()->regenerateToken();
 
-        return redirect()->route('topLogin');
+        return redirect()->route('productList');
     }
     
 }
