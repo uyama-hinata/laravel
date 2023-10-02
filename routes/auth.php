@@ -9,6 +9,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisteredProductController;
 use App\Http\Controllers\ProductListController;
+use App\Http\Controllers\ProductDetailController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -78,3 +79,5 @@ Route::middleware('auth')->group(function () {
 Route::get('product-list',[ProductListController::class,'productList'])->name('productList');
 // サブカテゴリを取得
 Route::get('product-register/{key}',[ProductListController::class, 'getSub'])->name('getSub');
+// 商品詳細を表示
+Route::get('product-detail/{id}',[ProductDetailController::class,'productDetail'])->name('productDetail');

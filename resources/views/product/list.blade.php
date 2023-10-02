@@ -61,7 +61,8 @@
                             <div class="show_category">{{$product->product_category->name}}</div>＞
                             <div class="show_subcategory">{{$product->product_subcategory->name}}</div>
                         </div>
-                        <div class="show_name">{{$product->name}}</div>
+                        <div class="show_name"><a class="show_name" href="product-detail/{{$product->id}}">{{$product->name}}</a></div>
+                        <div><a class="detail_btn" href="product-detail/{{$product->id}}">詳細</a></div>
                     </div>
                 </div>
             @endforeach
@@ -73,7 +74,7 @@
             <a href="{{route('topLogin')}}" name="toLogin_btn" class="toTop">トップに戻る</a>
         @endauth
         @guest
-        <a href="{{route('topLogout')}}" name="toLogout_btn" class="toTop">トップに戻る</a>
+            <a href="{{route('topLogout')}}" name="toLogout_btn" class="toTop">トップに戻る</a>
         @endguest
         
     </main>

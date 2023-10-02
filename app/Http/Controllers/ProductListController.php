@@ -24,7 +24,8 @@ class ProductListController extends Controller
     {
         // 一覧から来たということをセッションに入れる
         session(['previous_page'=>'list']);
-
+        // 現在のページをセッションに入れる
+        session(['previous_page' =>request()->page ?? 1]);
 
         $categories=Product_category::all();
         $subcategories=Product_subcategory::all();

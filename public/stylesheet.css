@@ -229,8 +229,8 @@ a {
     font-size: 16px;
     display: block;
     margin: auto;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 20px;
+    margin-bottom: 30px;
 }
 
 .header_msg.list{
@@ -267,4 +267,25 @@ a {
 
 .show-category,.show-subcategory{
     margin-right: 10px;
+}
+
+.show_name{
+    background-color: #fff;
+    color: #385f8d;
+}
+
+.detail_btn{
+    background-color: #385f8d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 14px;
+    float: right;
+}
+
+.detail_name{
+    font-weight: bold;
+    font-size: larger;
 }
