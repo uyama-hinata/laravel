@@ -25,6 +25,7 @@
             @csrf
             <a href="{{route('productList')}}" name="toList_btn">商品一覧</a>
             <a href="{{route('productRegister')}}" name="toRegist_btn">新規商品登録</a>
+            <a href="{{route('mypage')}}" name="toList_btn">マイページ</a>
             <input type="submit" value="ログアウト" class="logout-button"/>
         </form>
     </header>

@@ -11,6 +11,7 @@ use App\Http\Controllers\RegisteredProductController;
 use App\Http\Controllers\ProductListController;
 use App\Http\Controllers\ProductDetailController;
 use App\Http\Controllers\RegisterReviewController;
+use App\Http\Controllers\MypageController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -83,6 +84,9 @@ Route::middleware('auth')->group(function () {
     Route::post('review-confirm', [RegisterReviewController::class, 'exeReview'])->name('exeReview');
     // 完了画面を表示
     Route::get('review-thanks', [RegisterReviewController::class, 'thanksReview'])->name('thanksReview');
+
+    // マイページを表示
+    Route::get('mypage',[MypageController::class,'mypage'])->name('mypage');
                  
 });
 
