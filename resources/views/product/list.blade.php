@@ -89,7 +89,7 @@
     <script>
         $(function(){
             // サブカテゴリをロードする関数
-            function loadSubcategories(categoryId){
+            function loadSubcategories(categoryId,callback){
                 $.get(`/product-register/${categoryId}`,function(data){
                     // サブカテゴリをクリア
                     var subcategorySelect=$('#product_subcategory_id');
@@ -103,20 +103,23 @@
                         var selected='{{old("search_subcategory")}}' == subcategory.id ? 'selected' : '';
                         subcategorySelect.append(`<option value="${subcategory.id}" ${selected}>${subcategory.name}</option>`);
                     });
+
+                    if(callback){callback();}
                 });
             }
+            
             // カテゴリが変更された時にサブカテゴリをロード
             $(`#product_category_id`).change(function(){
                 var categoryId=$(this).val();
                 loadSubcategories(categoryId);
             });
+
             // ページのロード時にサブカテゴリをロード
             var initialCategoryId=$(`#product_category_id`).val();
             if(initialCategoryId){
-                loadSubcategories(initialCategoryId,function({
-                    // サブカテゴリの値を設定
-                    $('#product_subcategory_id').val('{{ old('search_subcategory') }}');
-                }));
+                loadSubcategories(initialCategoryId,function(){
+                    $('#product_category_id').val('{{ old('search_subcategory') }}');
+                });
             }
         });
     </script>
