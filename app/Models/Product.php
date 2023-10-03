@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class product extends Model
+class Product extends Model
 {
     use HasFactory;
     // テーブル名
@@ -29,5 +29,9 @@ class product extends Model
     public function product_subcategory()
     {
         return $this->belongsTo(Product_subcategory::class);
+    }
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
     }
 }

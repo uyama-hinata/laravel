@@ -289,3 +289,53 @@ a {
     font-weight: bold;
     font-size: larger;
 }
+
+.toRegisterReview{
+    display: block;  
+    text-align: center;
+    color: #fff; 
+    background-color:#3490dc;
+    margin: 10px auto;
+    padding: 10px 0px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 30%;
+    font-size:13px;
+}
+
+.back_review{
+    display: block;  
+    text-align: center;
+    color: #007BFF; 
+    background-color:#fff;
+    border:1px solid #007BFF;
+    margin: 10px auto;
+    padding: 10px 0px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 30%;
+    font-size:13px;
+}
+
+.toReviewList{
+    background-color:#fff;
+    color:#007BFF;
+}
+
+.review_item{
+    margin-bottom: 20px;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.review_header{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.show_nickname{
+    margin-right: 30px;
+}

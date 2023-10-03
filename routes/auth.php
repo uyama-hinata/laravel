@@ -10,6 +10,7 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisteredProductController;
 use App\Http\Controllers\ProductListController;
 use App\Http\Controllers\ProductDetailController;
+use App\Http\Controllers\RegisterReviewController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -58,7 +59,6 @@ Route::middleware('auth')->group(function () {
 
     // 完了画面を表示・メール送信
     Route::get('thanks', [RegisterThanksController::class, 'thanks'])->name('thanks');
-    
 
     // 商品登録画面を表示
     Route::get('product-register', [RegisteredProductController::class, 'productRegister'])->name('productRegister');
@@ -72,6 +72,17 @@ Route::middleware('auth')->group(function () {
     Route::get('product-confirm', [RegisteredProductController::class, 'productConfirm'])->name('productConfirm');
     // 登録
     Route::post('product-confirm', [RegisteredProductController::class, 'exeProduct'])->name('exeProduct');
+
+    // レビュー登録画面を表示
+    Route::get('review-register/{id}',[RegisterReviewController::class,'reviewRegister'])->name('reviewRegister');
+    // データを受け渡す
+    Route::post('review-register', [RegisterReviewController::class, 'postReview'])->name('postReview');
+    // 確認画面を表示
+    Route::get('review-confirm/{id}', [RegisterReviewController::class, 'reviewConfirm'])->name('reviewConfirm');
+    // 登録
+    Route::post('review-confirm', [RegisterReviewController::class, 'exeReview'])->name('exeReview');
+    // 完了画面を表示
+    Route::get('review-thanks', [RegisterReviewController::class, 'thanksReview'])->name('thanksReview');
                  
 });
 
@@ -79,5 +90,9 @@ Route::middleware('auth')->group(function () {
 Route::get('product-list',[ProductListController::class,'productList'])->name('productList');
 // サブカテゴリを取得
 Route::get('product-register/{key}',[ProductListController::class, 'getSub'])->name('getSub');
+
 // 商品詳細を表示
 Route::get('product-detail/{id}',[ProductDetailController::class,'productDetail'])->name('productDetail');
+
+// レビュー一覧を表示
+Route::get('product-review-list',[RegisterReviewController::class,'reviewList'])->name('reviewList');

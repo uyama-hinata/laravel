@@ -30,7 +30,7 @@ class RegisteredProductController extends Controller
     }
     /**
      * 画像ファイルをproductImagesディレクトリに画像を保存
-     */
+    */
     public function upload(Request $request)
     {
 
@@ -131,7 +131,6 @@ class RegisteredProductController extends Controller
         ->withInput($input);
         }
 
-
         // データベースに登録の処理
         $product=new Product();
         $product->member_id=auth()->id();
@@ -144,9 +143,6 @@ class RegisteredProductController extends Controller
         if(isset($paths['path_4'])){$product->image_4=$paths['path_4'];}
         $product->product_content=$input['product_content'];
         $product->save();
-
-        // セッションクリア
-        $request->session()->forget('uploaded_paths');
        
         // 二重登録を防ぐ
         $request->session()->regenerateToken();

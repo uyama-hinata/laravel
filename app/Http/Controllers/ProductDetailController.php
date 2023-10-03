@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Product_category;
-use App\Models\Product_subcategory;
 use App\Models\Product;
+use App\Models\Review;
 
 class ProductDetailController extends Controller
 {
@@ -21,7 +19,20 @@ class ProductDetailController extends Controller
             return redirect('productList');
         }
 
-        return view('product.detail',compact('id','product'));
+        // IDをセッションに入れる
+        session(['product_id'=>$id]);
+        session(['name'=>$product->name]);
+        session(['image_1'=>$product->image_1]);
+        session(['image_2'=>$product->image_2]);
+        session(['image_3'=>$product->image_3]);
+        session(['image_4'=>$product->image_4]);
+
+        $averageEvaluation = Review::where('product_id',$id)
+        ->selectRaw('FLOOR(AVG(evaluation)) as evaluations')
+        ->first();
+
+
+        return view('product.detail',compact('product','averageEvaluation'));
         
     }
 }

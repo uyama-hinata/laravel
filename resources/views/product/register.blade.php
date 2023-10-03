@@ -96,12 +96,12 @@
 
             <input  type="submit" class="btn_next" value="確認画面へ" id="btn_next">
 
-            {{-- ログイン画面から来た人 --}}
-            @if(session('previous_page')=='login')
+            {{-- トップ画面から来た人 --}}
+            @if(session('from_page')=='loginTop')
                 <a href="{{route('topLogin')}}" name="toLogin_btn" class="toTop">トップに戻る</a>
             @endif
             {{-- 一覧画面から来た人 --}}
-            @if(session('previous_page')=='list')
+            @if(session('from_page')=='list')
                 <a href="{{route('productList')}}" name="toList_btn" class="toTop">一覧に戻る</a>
             @endif
             
@@ -130,22 +130,22 @@
             // 画像を保持
             document.getElementById("btn_next").onclick=function(){
                 
-                var image1Path="{{session('uploaded_paths.path_1')}}";
+                var image1Path="{{old('uploaded_paths.path_1')}}";
                 if(image1Path){
                     document.getElementById('imageDisplay1').src='/storage/'+image1Path;
                 }
 
-                var image2Path="{{session('uploaded_paths.path_2')}}";
+                var image2Path="{{old('uploaded_paths.path_2')}}";
                 if(image2Path){
                     document.getElementById('imageDisplay2').src='/storage/'+image2Path;
                 }
 
-                var image3Path="{{session('uploaded_paths.path_3')}}";
+                var image3Path="{{old('uploaded_paths.path_3')}}";
                 if(image3Path){
                     document.getElementById('imageDisplay3').src='/storage/'+image3Path;
                 }
 
-                var image4Path="{{session('uploaded_paths.path_4')}}";
+                var image4Path="{{old('uploaded_paths.path_4')}}";
                 if(image4Path){
                     document.getElementById('imageDisplay4').src='/storage/'+image4Path;
                 }

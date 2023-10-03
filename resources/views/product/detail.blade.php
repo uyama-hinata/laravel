@@ -44,7 +44,23 @@
             ■商品説明<br>
             {{$product->product_content}}
         </div>
-        
+        <div class="detail_review">
+            ■商品レビュー<br>
+            総合評価 : 
+            @if(empty($averageEvaluation->evaluations))
+            @elseif($averageEvaluation->evaluations==1)★
+            @elseif($averageEvaluation->evaluations==2)★★
+            @elseif($averageEvaluation->evaluations==3)★★★
+            @elseif($averageEvaluation->evaluations==4)★★★★
+            @elseif($averageEvaluation->evaluations==5)★★★★★
+            @endif
+            {{$averageEvaluation->evaluations ?? '未評価'}}
+        </div>
+        <div class="toReviewList"><a class="toReviewList" href="{{route('reviewList')}}">＞＞レビューを見る</a></div>
+
+        @auth
+        <a href="{{route('reviewRegister',['id'=>$product->id])}}" class="toRegisterReview">この商品についてのレビューを登録</a>
+        @endauth
         {{-- それぞれ元居た場所に --}}
         <a href="{{route('productList',['page'=>session('previous_page')])}}" name="toList_btn" class="toTop">一覧に戻る</a>
         

@@ -1,38 +1,32 @@
 @if ($paginator->hasPages())
-    <div>
-        <ul class="pagination">
-            {{-- Previous Page Link --}}
-            @if (!$paginator->onFirstPage())
-                <li class="page-item">
-                    <a class="page-link" href="{{ $paginator->previousPageUrl() }}" rel="prev">{{'前へ'}}</a>
-                </li>
-            @endif
+    <ul class="pagination">
+        {{-- Previous Page Link --}}
+        @if (!$paginator->onFirstPage())
+            <li class="page-item"><a class="page-link" href="{{ $paginator->previousPageUrl() }}" rel="prev">前へ</a></li>
+        @endif
 
-            {{-- Pagination Elements --}}
-            @foreach ($elements as $element)
-                {{-- "Three Dots" Separator --}}
-                @if (is_string($element))
-                    <li class="page-item disabled" aria-disabled="true"><span class="page-link">{{ $element }}</span></li>
-                @endif
+        @php
+            $start = $paginator->currentPage() - 1;
+            $end = $paginator->currentPage() + 1;
 
-                {{-- Array Of Links --}}
-                @if (is_array($element))
-                    @foreach ($element as $page => $url)
-                        @if ($page == $paginator->currentPage())
-                            <li class="page-item active" aria-current="page"><span class="page-link">{{ $page }}</span></li>
-                        @else
-                            <li class="page-item"><a class="page-link" href="{{ $url }}">{{ $page }}</a></li>
-                        @endif
-                    @endforeach
-                @endif
-            @endforeach
+            if ($start < 1) {
+                $start = 1;
+                $end = min(3, $paginator->lastPage());
+            } elseif ($end > $paginator->lastPage()) {
+                $end = $paginator->lastPage();
+                $start = max(1, $end - 2);
+            }
+        @endphp
 
-            {{-- Next Page Link --}}
-            @if ($paginator->hasMorePages())
-                <li class="page-item">
-                    <a class="page-link" href="{{ $paginator->nextPageUrl() }}" rel="next">{{'次へ'}}</a>
-                </li>
-            @endif
-        </ul>
-    </div>
+        @for ($i = $start; $i <= $end; $i++)
+            <li class="page-item{{ $paginator->currentPage() == $i ? ' active' : '' }}">
+                <a class="page-link" href="{{ $paginator->url($i) }}">{{ $i }}</a>
+            </li>
+        @endfor
+
+        {{-- Next Page Link --}}
+        @if ($paginator->hasMorePages())
+            <li class="page-item"><a class="page-link" href="{{ $paginator->nextPageUrl() }}" rel="next">次へ</a></li>
+        @endif
+    </ul>
 @endif

@@ -20,7 +20,7 @@ class TopController extends Controller
         $request->session()->forget('uploaded_paths');
         
         // トップから来たということをセッションに入れる
-        session(['previous_page'=>'login']);
+        session(['from_page'=>'loginTop']);
         
         // 現在のログインユーザーを取得
         $user= Auth::user();

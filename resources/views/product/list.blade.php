@@ -24,15 +24,13 @@
                             <option value="{{$category->id}}" {{request('search_category')==$category->id ?  'selected' : ''}}>{{ $category->name }}</option>
                         @endforeach
                     </select>
-                    <select name="search__subcategory" id="product_subcategory_id">
+                    <select name="search_subcategory" id="product_subcategory_id">
                         <option value=""></option>
-                        @if(request('search__subcategory'))
                             @foreach($subcategories as $subcategory)
-                                @if($subcategory->product_category_id = request('search_category'))
-                                    <option value="{{$subcategory->id}}"{{request('search__subcategory')==$subcategory->id ?  'selected' : ''}}>{{ $subcategory->name }}</option>
+                                @if($subcategory->product_category_id == request('search_category'))
+                                    <option value="{{$subcategory->id}}"{{request('search_subcategory')==$subcategory->id ?  'selected' : ''}}>{{ $subcategory->name }}</option>
                                 @endif
                             @endforeach 
-                        @endif
                     </select>
                 <span>フリーワード</span>
                     <input type="text" name="search_freeword" value="{{request('search_freeword')}}">
@@ -62,6 +60,16 @@
                             <div class="show_subcategory">{{$product->product_subcategory->name}}</div>
                         </div>
                         <div class="show_name"><a class="show_name" href="product-detail/{{$product->id}}">{{$product->name}}</a></div>
+                        <div class="show_review">
+                            @if(empty($product->averageEvaluation->evaluations))
+                            @elseif($product->averageEvaluation->evaluations==1)★
+                            @elseif($product->averageEvaluation->evaluations==2)★★
+                            @elseif($product->averageEvaluation->evaluations==3)★★★
+                            @elseif($product->averageEvaluation->evaluations==4)★★★★
+                            @elseif($product->averageEvaluation->evaluations==5)★★★★★
+                            @endif
+                            {{$product->averageEvaluation->evaluations ?? '未評価'}}
+                        </div>
                         <div><a class="detail_btn" href="product-detail/{{$product->id}}">詳細</a></div>
                     </div>
                 </div>
@@ -80,24 +88,36 @@
     </main>
     <script>
         $(function(){
-            // カテゴリを選択すると呼び出される関数
-            $('#product_category_id').change(function(){
-                var key=$('#product_category_id option:selected').val();
-                console.log(key);
-
-                // 選択されたカテゴリに基づいてサブを取得
-                $.get(`/product-register/${key}`,function(data){
+            // サブカテゴリをロードする関数
+            function loadSubcategories(categoryId){
+                $.get(`/product-register/${categoryId}`,function(data){
                     // サブカテゴリをクリア
                     var subcategorySelect=$('#product_subcategory_id');
                     subcategorySelect.empty();
 
+                    // 空白の選択肢を追加
+                    subcategorySelect.append('<option value=""></option>');
+
                     // 新しいオプションを追加
                     data.forEach(function(subcategory){
-                        subcategorySelect.append(`<option value="${subcategory.id}">${subcategory.name}</option>`);
+                        var selected='{{old("search_subcategory")}}' == subcategory.id ? 'selected' : '';
+                        subcategorySelect.append(`<option value="${subcategory.id}" ${selected}>${subcategory.name}</option>`);
                     });
-
                 });
+            }
+            // カテゴリが変更された時にサブカテゴリをロード
+            $(`#product_category_id`).change(function(){
+                var categoryId=$(this).val();
+                loadSubcategories(categoryId);
             });
+            // ページのロード時にサブカテゴリをロード
+            var initialCategoryId=$(`#product_category_id`).val();
+            if(initialCategoryId){
+                loadSubcategories(initialCategoryId,function({
+                    // サブカテゴリの値を設定
+                    $('#product_subcategory_id').val('{{ old('search_subcategory') }}');
+                }));
+            }
         });
     </script>
 </body>

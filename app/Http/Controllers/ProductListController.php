@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\Product_category;
 use App\Models\Product_subcategory;
 use Illuminate\Http\Request;
+use App\Models\Review;
 
 class ProductListController extends Controller
 {
@@ -22,8 +23,9 @@ class ProductListController extends Controller
      */
     public function productList(Request $request)
     {
+
         // 一覧から来たということをセッションに入れる
-        session(['previous_page'=>'list']);
+        session(['from_page'=>'list']);
         // 現在のページをセッションに入れる
         session(['previous_page' =>request()->page ?? 1]);
 
@@ -49,6 +51,14 @@ class ProductListController extends Controller
         }
 
         $products=$query->orderBy('id','desc')->paginate(10);
+
+        // 総合評価
+        foreach($products as $product){
+        $product->averageEvaluation = Review::where('product_id',$product->id)
+        ->selectRaw('FLOOR(AVG(evaluation)) as evaluations')
+        ->first();
+        }
+
         return view('product.list',compact('categories','subcategories','products'));
         
     }
