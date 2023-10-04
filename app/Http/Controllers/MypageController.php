@@ -20,5 +20,23 @@ class MypageController extends Controller
 
         return view('mypage.mypage',compact('user'));
     }
+    /**
+     * 退会ページを表示
+     */
+    public function delete()
+    {
+        
+        return view('mypage.delete');
+    }
+    /**
+     * 退会処理
+     */
+    public function exeDelete()
+    {
+        $user= Auth::user();
+        $user->delete();
+        Auth::logout();
+        return redirect(route('topLogout'));
+    }
 }
     

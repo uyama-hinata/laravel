@@ -87,6 +87,10 @@ Route::middleware('auth')->group(function () {
 
     // マイページを表示
     Route::get('mypage',[MypageController::class,'mypage'])->name('mypage');
+    // 退会ページを表示
+    Route::get('delete',[MypageController::class,'delete'])->name('delete');
+    // 退会処理
+    Route::post('delete',[MypageController::class,'exeDelete'])->name('exeDelete');
                  
 });
 

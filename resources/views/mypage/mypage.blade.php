@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>レビュー一覧画面</title>
+    <title>マイページ</title>
     <link rel="stylesheet" href="{{ asset('stylesheet.css') }}">
 </head>
 <body>
@@ -23,6 +23,7 @@
             <div class="mypage_password">セキュリティのため非表示</div>
             <div class="mypage_email">{{$user->email}}</div>
         </div>
+        <a href="{{route('delete')}}" class="back_review">退会</a>
     </main>
 </body>
 </html>
