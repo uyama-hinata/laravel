@@ -27,7 +27,7 @@
                     <select name="search_subcategory" id="product_subcategory_id">
                         <option value=""></option>
                             @foreach($subcategories as $subcategory)
-                                @if($subcategory->product_category_id == request('search_category'))
+                                @if(!request('search_category') || $subcategory->product_category_id == request('search_category'))
                                     <option value="{{$subcategory->id}}"{{request('search_subcategory')==$subcategory->id ?  'selected' : ''}}>{{ $subcategory->name }}</option>
                                 @endif
                             @endforeach 
@@ -76,7 +76,7 @@
             @endforeach
         </div>
 
-        <div class="page">{{$products->links('vendor.pagination.bootstrap-5')}}</div>
+        <div class="page">{{$products->appends(request()->query())->links('vendor.pagination.bootstrap-5')}}</div>
 
         @auth
             <a href="{{route('topLogin')}}" name="toLogin_btn" class="toTop">トップに戻る</a>
@@ -114,13 +114,6 @@
                 loadSubcategories(categoryId);
             });
 
-            // ページのロード時にサブカテゴリをロード
-            var initialCategoryId=$(`#product_category_id`).val();
-            if(initialCategoryId){
-                loadSubcategories(initialCategoryId,function(){
-                    $('#product_category_id').val('{{ old('search_subcategory') }}');
-                });
-            }
         });
     </script>
 </body>
