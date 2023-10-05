@@ -30,7 +30,6 @@ class RegisteredUserController extends Controller
     public function postData(Request $request)
     {
         $input=$request->only($this->formitems);
-        $userId=null;
         $validatorRules = [
             'name_sei'=>'required|max:20',
             'name_mei'=>'required|max:20',
@@ -93,13 +92,14 @@ class RegisteredUserController extends Controller
         $user->gender=$input['gender'];
         $user->password=bcrypt($input['password']);
         $user->email=$input['email'];
+        $user->auth_code=str_pad(random_int(0,999999),6,0,STR_PAD_LEFT);
         $user->save();
 
-         //メール送信    
-         Mail::to($input['email'])->send(new ThanksMail());
+        //メール送信    
+        Mail::to($input['email'])->send(new ThanksMail());
 
-         // 新しいユーザーをログインさせる
-         Auth::login($user);
+        // 新しいユーザーをログインさせる
+        Auth::login($user);
 
         // 二重登録を防ぐ
         $request->session()->regenerateToken();

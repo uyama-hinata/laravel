@@ -339,3 +339,48 @@ a {
 .show_nickname{
     margin-right: 30px;
 }
+
+.mepage_show {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.mypage_name,
+.mypage_nickname,
+.mypage_gender,
+.mypage_password,
+.mypage_email {
+    margin-bottom: 20px;
+}
+
+.mypage_name span,
+.mypage_nickname span,
+.mypage_gender span,
+.mypage_password span,
+.mypage_email span {
+    font-weight: bold;
+    display: inline-block;
+    min-width: 150px;
+}
+
+.change_btn{
+    margin-left: 50px;
+    color: #007BFF;
+    background-color:#fff;
+    text-decoration: underline;
+}
+
+.ChangeEmail{
+    display: block;  
+    text-align: center;
+    color: #fff; 
+    background-color:#3490dc;
+    margin: 10px auto;
+    padding: 10px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size:13px;
+}

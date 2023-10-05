@@ -12,6 +12,7 @@ use App\Http\Controllers\ProductListController;
 use App\Http\Controllers\ProductDetailController;
 use App\Http\Controllers\RegisterReviewController;
 use App\Http\Controllers\MypageController;
+use App\Http\Controllers\ChangeUserinfoController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -91,6 +92,29 @@ Route::middleware('auth')->group(function () {
     Route::get('delete',[MypageController::class,'delete'])->name('delete');
     // 退会処理
     Route::post('delete',[MypageController::class,'exeDelete'])->name('exeDelete');
+
+    // 会員情報変更画面を表示
+    Route::get('change-info',[ChangeUserinfoController::class,'changeInfo'])->name('changeInfo');
+    // データを受け渡す
+    Route::post('change-info',[ChangeUserinfoController::class,'postInfo'])->name('postInfo');
+    // 確認画面を表示
+    Route::get('info-confirm',[ChangeUserinfoController::class,'infoConfirm'])->name('infoConfirm');
+    // 変更処理
+    Route::post('info-confirm',[ChangeUserinfoController::class,'exeInfo'])->name('exeInfo');
+
+    // パスワード変更画面を表示
+    Route::get('change-pass',[ChangeUserinfoController::class,'changePass'])->name('changePass');
+    // 変更処理
+    Route::post('change-pass',[ChangeUserinfoController::class,'exeChangePass'])->name('exeChangePass');
+
+    // メールアドレス変更画面を表示
+    Route::get('change-email',[ChangeUserinfoController::class,'changeEmail'])->name('changeEmail');
+    // 認証メール送信（バリデーション）
+    Route::post('change-email', [ChangeUserinfoController::class, 'sendChangeEmail'])->name('sendChangeEmail');
+    // 認証コード入力画面を表示
+    Route::get('check-code', [ChangeUserinfoController::class, 'checkCode'])->name('checkCode');
+    // メールアドレス変更の処理
+    Route::post('check-code', [ChangeUserinfoController::class, 'exeChangeEmail'])->name('exeChangeEmail');
                  
 });
 
