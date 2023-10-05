@@ -40,6 +40,10 @@
                 {{$user->email}}
                 <a href="{{route('changeEmail')}}" class="change_btn">メールアドレス変更＞</a>
             </div>
+            <div class="mypage_review">
+                <span>レビュー</span>
+                <a href="{{route('reviewAdmin')}}" class="change_btn">商品レビュー管理＞</a>
+            </div>
         </div>
         <a href="{{route('delete')}}" class="back_review">退会</a>
     </main>

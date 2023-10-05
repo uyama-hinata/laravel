@@ -359,7 +359,8 @@ a {
 .mypage_nickname span,
 .mypage_gender span,
 .mypage_password span,
-.mypage_email span {
+.mypage_email span,
+.mypage_review span {
     font-weight: bold;
     display: inline-block;
     min-width: 150px;

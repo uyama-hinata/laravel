@@ -13,6 +13,7 @@ use App\Http\Controllers\ProductDetailController;
 use App\Http\Controllers\RegisterReviewController;
 use App\Http\Controllers\MypageController;
 use App\Http\Controllers\ChangeUserinfoController;
+use App\Http\Controllers\ChangeReviewContloller;
 use Illuminate\Support\Facades\Route;
 
 
@@ -115,6 +116,9 @@ Route::middleware('auth')->group(function () {
     Route::get('check-code', [ChangeUserinfoController::class, 'checkCode'])->name('checkCode');
     // メールアドレス変更の処理
     Route::post('check-code', [ChangeUserinfoController::class, 'exeChangeEmail'])->name('exeChangeEmail');
+
+    // 商品レビュー管理画面を表示
+    Route::get('review-admin',[ChangeReviewContloller::class,'reviewAdmin'])->name('reviewAdmin');
                  
 });
 
