@@ -13,7 +13,7 @@ use App\Http\Controllers\ProductDetailController;
 use App\Http\Controllers\RegisterReviewController;
 use App\Http\Controllers\MypageController;
 use App\Http\Controllers\ChangeUserinfoController;
-use App\Http\Controllers\ChangeReviewContloller;
+use App\Http\Controllers\ChangeReviewController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -52,8 +52,6 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
 
-    // 完了画面を表示
-    Route::get('thanks', [RegisterThanksController::class, 'thanks'])->name('thanks');
     
     //トップ画面（ログイン時）を表示
     Route::get('topLogin', [TopController::class, 'topLogin'])->name('topLogin');
@@ -118,8 +116,19 @@ Route::middleware('auth')->group(function () {
     Route::post('check-code', [ChangeUserinfoController::class, 'exeChangeEmail'])->name('exeChangeEmail');
 
     // 商品レビュー管理画面を表示
-    Route::get('review-admin',[ChangeReviewContloller::class,'reviewAdmin'])->name('reviewAdmin');
-                 
+    Route::get('review-admin',[ChangeReviewController::class,'reviewAdmin'])->name('reviewAdmin');
+    // 商品レビュー編集画面を表示
+    Route::get('review-edit/{id}',[ChangeReviewController::class,'reviewEdit'])->name('reviewEdit');
+    // データを受け渡す
+    Route::post('review-edit',[ChangeReviewController::class,'postEdit'])->name('postEdit');
+    // 確認画面を表示
+    Route::get('review-edit-confirm',[ChangeReviewController::class,'reviewEditConfirm'])->name('reviewEditConfirm');
+    // 編集処理
+    Route::post('review-edit-confirm',[ChangeReviewController::class,'exeEdit'])->name('exeEdit');
+    // 商品レビュー削除確認画面を表示
+    Route::get('review-delete/{id}',[ChangeReviewController::class,'reviewDelete'])->name('reviewDelete');
+    // 削除処理
+    Route::post('review-delete/{id}',[ChangeReviewController::class,'exeReviewDelete'])->name('exeReviewDelete');      
 });
 
 // 商品一覧を表示

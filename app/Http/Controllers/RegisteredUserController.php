@@ -36,7 +36,7 @@ class RegisteredUserController extends Controller
             'nickname'=>'required|max:10',
             'gender'=>'required|in:1,2',
             'password'=>['required','min:8','max:20','confirmed',new Hankaku()],
-            'email'=>['required','email','max:200','unique:users','email',new Email()],
+            'email'=>['required','max:200','unique:users','email',new Email()],
         ];
         
         $validator=Validator::make($input,$validatorRules);

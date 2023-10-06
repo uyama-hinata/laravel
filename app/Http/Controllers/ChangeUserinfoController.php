@@ -126,7 +126,7 @@ class ChangeUserinfoController extends Controller
     public function sendChangeEmail(Request $request)
     {
         $request->validate([
-            'email'=>['required','email','max:200',new Email()],
+            'email'=>['required','email','max:200','unique:users',new Email()],
         ]);
 
         $newEmail=$request->input('email');

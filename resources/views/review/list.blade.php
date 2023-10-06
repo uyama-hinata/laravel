@@ -65,7 +65,7 @@
             @foreach($reviews as $review)
                 <div class="review_item">
                     <div class="review_header">
-                        <div class="show_nickname">{{$review->user->nickname}}さん</div>
+                        <div class="show_nickname">@if(!empty($review->user->nickname)){{$review->user->nickname}} さん@endif</div>
                         <div class="show_evaluatin">
                             @if(empty($review->evaluation))
                             @elseif($review->evaluation==1)★

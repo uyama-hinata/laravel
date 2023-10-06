@@ -49,6 +49,7 @@ class RegisterReviewController extends Controller
 
         // セッションに入れる
         $request->session()->put('register_input',$input);
+        // セッションから出す
         $product_id=$request->session()->get('product_id');
         return redirect()->route('reviewConfirm',['id'=>$product_id]);
         
