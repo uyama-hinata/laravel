@@ -17,6 +17,7 @@ use App\Http\Controllers\ChangeReviewController;
 use Illuminate\Support\Facades\Route;
 
 
+
 Route::middleware('guest')->group(function () {
     
     // 会員登録画面を表示
@@ -47,6 +48,8 @@ Route::middleware('guest')->group(function () {
     Route::get('Login', [LoginController::class, 'Login'])->name('Login');
     //ログイン処理
     Route::post('Login', [LoginController::class, 'postLogin'])->name('postLogin');
+
+    
 
 });
 
