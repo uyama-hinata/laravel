@@ -184,3 +184,26 @@ tbody{
     text-decoration: none;
     width: 30%;
 }
+
+.toEditer_btn{
+    color: #306896; 
+    background-color:#fff;
+    border: 1px solid #306896;
+    padding: 5px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.delete_btn{
+    color: #fff; 
+    background-color:#306896;
+    border:none;
+    padding: 5px 30px;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+.btn_group{
+    text-align: center;
+}

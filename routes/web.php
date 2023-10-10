@@ -36,5 +36,9 @@ Route::middleware('admin.auth')->group(function () {
     Route::get('admin-editerUser/{id}', [UserRegisterController::class, 'adminEditerUser'])->name('adminEditerUser');
     // データを受け渡す
     Route::post('admin-editerUser/{id}', [UserRegisterController::class, 'adminPostEditer'])->name('adminPostEditer');
+    // 詳細画面を表示
+    Route::get('admin-detailUser/{id}', [UserRegisterController::class, 'adminDetailUser'])->name('adminDetailUser');
+    // 削除処理
+    Route::post('admin-detailUser/{id}',[UserRegisterController::class, 'exeDeleteUser'])->name('exeDeleteUser');
 });
 

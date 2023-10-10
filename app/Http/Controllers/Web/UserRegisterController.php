@@ -130,4 +130,31 @@ class UserRegisterController extends Controller
         $request->session()->put('register_input',$input);
         return redirect()->route('adminUserConfirm');
     }
+    /**
+     * 詳細画面を表示
+     */
+    public function adminDetailUser($id,Request $request)
+    {
+        $user=User::find($id);
+
+        return view('admin.detailUser', compact('user'));
+    }
+    /**
+     * 削除処理
+     */
+    public function exeDeleteUser($id)
+    {
+        $user=User::find($id);
+
+        // 紐づくレビューを削除
+        if($user->reviews !== null){
+            foreach($user->reviews as $review){
+                $review->delete();
+            }
+        }
+
+        $user->delete();
+
+        return redirect()->route('userList');
+    }
 }

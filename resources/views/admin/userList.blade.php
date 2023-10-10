@@ -55,6 +55,7 @@
                         @endif
                     </th>
                     <th>編集</th>
+                    <th>詳細</th>
                 </tr>
             </thead>
             <tbody>
@@ -66,6 +67,7 @@
                         <th>@if($user->gender==1)男性@elseif($user->gender==2)女性@endif</th>
                         <th>{{date_format($user->created_at,'Y/m/d')}}</th>
                         <th><a href="{{route('adminEditerUser',['id'=> $user->id])}}">編集</a></th>
+                        <th><a href="{{route('adminDetailUser',['id'=> $user->id])}}">詳細</a></th>
                     </tr>
                 @endforeach
             </tbody>
