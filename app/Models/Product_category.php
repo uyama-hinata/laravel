@@ -19,6 +19,6 @@ class Product_category extends Model
     // リレーション
     public function product_subcategories()
     {
-        return $this->hasMany(Product_subcategory::class);
+        return $this->hasMany(Product_subcategory::class,'product_category_id');
     }
 }
