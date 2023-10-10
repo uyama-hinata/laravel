@@ -9,8 +9,9 @@
     <header>
         <div class="header_main_msg">会員一覧</div>
         
+        <a href="{{route('adminRegisterUser')}}" class="toTop_btn">会員登録</a>
         <a href="{{route('adminTop')}}" class="toTop_btn">トップへ戻る</a>
-        
+       
     </header>
     <main>
         <div class="search_box">
@@ -53,6 +54,7 @@
                             <a href="{{route('userList',array_merge(request()->query(),['dateorder'=>'asc']))}}">▼</a>
                         @endif
                     </th>
+                    <th>編集</th>
                 </tr>
             </thead>
             <tbody>
@@ -63,6 +65,7 @@
                         <th>{{$user->email}}</th>
                         <th>@if($user->gender==1)男性@elseif($user->gender==2)女性@endif</th>
                         <th>{{date_format($user->created_at,'Y/m/d')}}</th>
+                        <th><a href="{{route('adminEditerUser',['id'=> $user->id])}}">編集</a></th>
                     </tr>
                 @endforeach
             </tbody>

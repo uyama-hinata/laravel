@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Web\AdministersTopController;
 use App\Http\Controllers\Web\UserListController;
+use App\Http\Controllers\Web\UserRegisterController;
 use Illuminate\Support\Facades\Route;
 
 require __DIR__ . '/auth.php';
@@ -19,7 +20,21 @@ Route::middleware('admin.auth')->group(function () {
     Route::get('admin-top', [AdministersTopController::class, 'adminTop'])->name('adminTop');
     // ログアウト処理
     Route::post('admin-top', [AdministersTopController::class, 'adminLogout'])->name('adminLogout');
+
     // 会員一覧を表示
     Route::get('admin-userList', [UserListController::class, 'userList'])->name('userList');
+
+    // 会員登録画面を表示
+    Route::get('admin-registerUser', [UserRegisterController::class, 'adminRegisterUser'])->name('adminRegisterUser');
+    // データを受け渡す
+    Route::post('admin-registerUser', [UserRegisterController::class, 'adminPostUser'])->name('adminPostUser');
+    // 確認画面を表示
+    Route::get('admin-registerUser/confirm', [UserRegisterController::class, 'adminUserConfirm'])->name('adminUserConfirm');
+    // 登録処理
+    Route::post('admin-registerUser/confirm',[UserRegisterController::class, 'exeUserRegister'])->name('exeUserRegister');
+    // 編集画面を表示
+    Route::get('admin-editerUser/{id}', [UserRegisterController::class, 'adminEditerUser'])->name('adminEditerUser');
+    // データを受け渡す
+    Route::post('admin-editerUser/{id}', [UserRegisterController::class, 'adminPostEditer'])->name('adminPostEditer');
 });
 
