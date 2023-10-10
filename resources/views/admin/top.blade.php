@@ -15,6 +15,7 @@
         </form>
     </header>
     <main>
+        <a href="{{route('userList')}}" class="ToList">会員一覧</a>
     </main>
 </body>
 </html>

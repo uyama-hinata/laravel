@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Web\AdministersTopController;
+use App\Http\Controllers\Web\UserListController;
 use Illuminate\Support\Facades\Route;
 
 require __DIR__ . '/auth.php';
@@ -18,6 +19,7 @@ Route::middleware('admin.auth')->group(function () {
     Route::get('admin-top', [AdministersTopController::class, 'adminTop'])->name('adminTop');
     // ログアウト処理
     Route::post('admin-top', [AdministersTopController::class, 'adminLogout'])->name('adminLogout');
-
+    // 会員一覧を表示
+    Route::get('admin-userList', [UserListController::class, 'userList'])->name('userList');
 });
 
