@@ -19,7 +19,7 @@ class UserRegisterController extends Controller
     { 
         // セッションに現在の画面場所を保存
         $request->session()->put('previous_page','register');
-        return view('admin.RegisterUser');
+        return view('admin.RegisterEditerUser');
     }
     /**
      * データを受け渡す(バリデーション)
@@ -103,7 +103,7 @@ class UserRegisterController extends Controller
         // セッションに現在の画面場所を保存
         $request->session()->put('previous_page','editer');
 
-        return view('admin.editerUser', compact('user'));
+        return view('admin.RegisterEditerUser', compact('user'));
     }
     /**
      * データを受け渡す(バリデーション)
