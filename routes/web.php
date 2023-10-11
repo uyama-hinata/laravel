@@ -56,6 +56,10 @@ Route::middleware('admin.auth')->group(function () {
     Route::post('admin-registerCategory/confirm',[CategoryRegisterController::class, 'exeCategoryRegister'])->name('exeCategoryRegister');
     // 編集画面を表示
     Route::get('admin-editerCategory/{id}', [CategoryRegisterController::class, 'adminEditerCategory'])->name('adminEditerCategory');
+    // 詳細画面を表示
+    Route::get('admin-detailCategory/{id}', [CategoryRegisterController::class, 'adminDetailCategory'])->name('adminDetailCategory');
+    // 削除処理
+    Route::post('admin-detailCategory/{id}',[CategoryRegisterController::class, 'exeDeleteCategory'])->name('exeDeleteCategory');
     
 });
 

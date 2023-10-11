@@ -207,3 +207,12 @@ tbody{
 .btn_group{
     text-align: center;
 }
+
+.subcategory_list{
+    list-style: none;
+    margin-left: 120px;
+}
+
+a{
+    text-decoration: none;
+}

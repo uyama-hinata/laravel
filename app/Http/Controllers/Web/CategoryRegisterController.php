@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use App\Models\Product;
 use App\Models\Product_category;
 use App\Models\Product_subcategory;
 use Illuminate\Http\Request;
-use App\Rules\AtLeastOneFieldRequired;
+
 
 
 
@@ -85,7 +84,7 @@ class CategoryRegisterController extends Controller
 
             // 既存のサブカテゴリを全て削除
             foreach($category->product_subcategories as $subcategory){
-                $subcategory->delete();
+                $subcategory->forceDelete();
             }
         }
 
@@ -127,5 +126,29 @@ class CategoryRegisterController extends Controller
 
         return view('admin.RegisterEditerCategory', compact('category','subcategories'));
     }
-    
+    /**
+     * 詳細画面を表示
+     */
+    public function adminDetailCategory($id,Request $request)
+    {
+        $category=Product_category::find($id);
+
+        return view('admin.detailCategory', compact('category'));
+    }
+    /**
+     * 削除処理
+     */
+    public function exeDeleteCategory($id)
+    {
+        $category=Product_category::find($id);
+
+        // 紐づくレビューを削除
+        foreach($category->product_subcategories as $product_subcategory){
+            $product_subcategory->delete();
+        }
+        
+        $category->delete();
+
+        return redirect()->route('categoryList');
+    }
 }

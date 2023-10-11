@@ -48,15 +48,17 @@
                         @endif
                     </th>
                     <th>編集</th>
+                    <th>詳細</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($categories as $category)
                     <tr>
                         <th>{{$category->id}}</th>
-                        <th>{{$category->name}}</th>
+                        <th><a href="{{route('adminDetailCategory',['id'=> $category->id])}}">{{$category->name}}</a></th>
                         <th>{{date_format($category->created_at,'Y/m/d')}}</th>
                         <th><a href="{{route('adminEditerCategory',['id'=>$category->id])}}">編集</a></th>
+                        <th><a href="{{route('adminDetailCategory',['id'=> $category->id])}}">詳細</a></th>
                     </tr>
                 @endforeach
             </tbody>
