@@ -5,6 +5,7 @@ use App\Http\Controllers\Web\UserListController;
 use App\Http\Controllers\Web\UserRegisterController;
 use App\Http\Controllers\Web\CategoryListController;
 use App\Http\Controllers\Web\CategoryRegisterController;
+use App\Http\Controllers\Web\AdminProductListController;
 use Illuminate\Support\Facades\Route;
 
 require __DIR__ . '/auth.php';
@@ -28,6 +29,8 @@ Route::middleware('admin.auth')->group(function () {
     Route::get('admin-userList', [UserListController::class, 'userList'])->name('userList');
     // 商品カテゴリ一覧を表示
     Route::get('admin-categoryList', [CategoryListController::class, 'categoryList'])->name('categoryList');
+    // 商品一覧を表示
+    Route::get('admin-prductList', [AdminProductListController::class, 'adminProductList'])->name('adminProductList');
 
     // 会員登録画面を表示
     Route::get('admin-registerUser', [UserRegisterController::class, 'adminRegisterUser'])->name('adminRegisterUser');

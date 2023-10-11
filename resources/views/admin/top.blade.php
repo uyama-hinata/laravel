@@ -17,6 +17,7 @@
     <main>
         <a href="{{route('userList')}}" class="ToList">会員一覧</a>
         <a href="{{route('categoryList')}}" class="ToList">商品カテゴリ一覧</a>
+        <a href="{{route('adminProductList')}}" class="ToList">商品一覧</a>
     </main>
 </body>
 </html>
