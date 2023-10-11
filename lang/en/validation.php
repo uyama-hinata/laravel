@@ -134,7 +134,7 @@ return [
     'required_with' => 'The :attribute field is required when :values is present.',
     'required_with_all' => 'The :attribute field is required when :values are present.',
     'required_without' => 'The :attribute field is required when :values is not present.',
-    'required_without_all' => 'The :attribute field is required when none of :values are present.',
+    'required_without_all' => '小カテゴリを1つ以上入力してください',
     'same' => 'The :attribute field must match :other.',
     'size' => [
         'array' => 'The :attribute field must contain :size items.',

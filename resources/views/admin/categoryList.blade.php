@@ -9,6 +9,7 @@
     <header>
         <div class="header_main_msg">カテゴリ一覧</div>
         
+        <a href="{{route('registerCategory')}}" class="toTop_btn">商品カテゴリ登録</a>
         <a href="{{route('adminTop')}}" class="toTop_btn">トップへ戻る</a>
        
     </header>
@@ -46,6 +47,7 @@
                             <a href="{{route('categoryList',array_merge(request()->query(),['dateorder'=>'asc']))}}">▼</a>
                         @endif
                     </th>
+                    <th>編集</th>
                 </tr>
             </thead>
             <tbody>
@@ -54,6 +56,7 @@
                         <th>{{$category->id}}</th>
                         <th>{{$category->name}}</th>
                         <th>{{date_format($category->created_at,'Y/m/d')}}</th>
+                        <th><a href="{{route('adminEditerCategory',['id'=>$category->id])}}">編集</a></th>
                     </tr>
                 @endforeach
             </tbody>

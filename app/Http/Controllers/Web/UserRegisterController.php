@@ -78,6 +78,7 @@ class UserRegisterController extends Controller
             $user=User::find($input['id']); 
         }
         
+        // 共通の処理
         $user->name_sei=$input['name_sei'];
         $user->name_mei=$input['name_mei'];
         $user->nickname=$input['nickname'];

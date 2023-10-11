@@ -4,6 +4,7 @@ use App\Http\Controllers\Web\AdministersTopController;
 use App\Http\Controllers\Web\UserListController;
 use App\Http\Controllers\Web\UserRegisterController;
 use App\Http\Controllers\Web\CategoryListController;
+use App\Http\Controllers\Web\CategoryRegisterController;
 use Illuminate\Support\Facades\Route;
 
 require __DIR__ . '/auth.php';
@@ -16,6 +17,7 @@ Route::middleware('guest')->group(function () {
     // ログイン処理
     Route::post('admin-login',[AdministersTopController::class, 'exeAdminLogin'])->name('exeAdminLogin');
 });
+
 Route::middleware('admin.auth')->group(function () {
     // トップ画面を表示
     Route::get('admin-top', [AdministersTopController::class, 'adminTop'])->name('adminTop');
@@ -43,5 +45,17 @@ Route::middleware('admin.auth')->group(function () {
     Route::get('admin-detailUser/{id}', [UserRegisterController::class, 'adminDetailUser'])->name('adminDetailUser');
     // 削除処理
     Route::post('admin-detailUser/{id}',[UserRegisterController::class, 'exeDeleteUser'])->name('exeDeleteUser');
+
+    // カテゴリ登録画面を表示
+    Route::get('admin-registerCategory', [CategoryRegisterController::class, 'registerCategory'])->name('registerCategory');
+    // データを受け渡す
+    Route::post('admin-registerCategory', [CategoryRegisterController::class, 'adminPostCategory'])->name('adminPostCategory');
+    // 確認画面を表示
+    Route::get('admin-registerCategory/confirm', [CategoryRegisterController::class, 'adminCategoryConfirm'])->name('adminCategoryConfirm');
+    // 登録処理
+    Route::post('admin-registerCategory/confirm',[CategoryRegisterController::class, 'exeCategoryRegister'])->name('exeCategoryRegister');
+    // 編集画面を表示
+    Route::get('admin-editerCategory/{id}', [CategoryRegisterController::class, 'adminEditerCategory'])->name('adminEditerCategory');
+    
 });
 
