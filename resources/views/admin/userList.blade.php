@@ -62,7 +62,7 @@
                 @foreach($users as $user)
                     <tr>
                         <th>{{$user->id}}</th>
-                        <th>{{$user->name_sei}}{{$user->name_mei}}</th>
+                        <th><a href="{{route('adminDetailUser',['id'=> $user->id])}}">{{$user->name_sei}}{{$user->name_mei}}</a></th>
                         <th>{{$user->email}}</th>
                         <th>@if($user->gender==1)男性@elseif($user->gender==2)女性@endif</th>
                         <th>{{date_format($user->created_at,'Y/m/d')}}</th>
