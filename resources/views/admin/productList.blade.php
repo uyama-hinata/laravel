@@ -9,7 +9,7 @@
     <header>
         <div class="header_main_msg">商品一覧</div>
         
-        
+        <a href="{{route('adminRegisterProduct')}}" class="toTop_btn">商品カテゴリ登録</a>
         <a href="{{route('adminTop')}}" class="toTop_btn">トップへ戻る</a>
        
     </header>
@@ -33,18 +33,18 @@
             <thead>
                 <tr>
                     <th>ID
-                        @if($order=='asc')
-                            <a href="{{route('adminProductList',array_merge(request()->query(),['order'=>'desc'])) }}">▲</a>
+                        @if ($sortOrder == 'asc' && $sortField == 'id')
+                            <a href="{{ route('adminProductList', array_merge(request()->query(), ['order' => 'desc', 'field' => 'id'])) }}">▲</a>
                         @else
-                            <a href="{{route('adminProductList',array_merge(request()->query(),['order'=>'asc'])) }}">▼</a>
+                            <a href="{{ route('adminProductList', array_merge(request()->query(), ['order' => 'asc', 'field' => 'id'])) }}">▼</a>
                         @endif
                     </th>
                     <th>商品大カテゴリ</th>
                     <th>登録日時
-                        @if($dateorder=='asc')
-                            <a href="{{route('adminProductList',array_merge(request()->query(),['dateorder'=>'desc']))}}">▲</a>
+                        @if ($sortOrder == 'asc' && $sortField == 'created_at')
+                            <a href="{{ route('adminProductList', array_merge(request()->query(), ['order' => 'desc', 'field' => 'created_at'])) }}">▲</a>
                         @else
-                            <a href="{{route('adminProductList',array_merge(request()->query(),['dateorder'=>'asc']))}}">▼</a>
+                            <a href="{{ route('adminProductList', array_merge(request()->query(), ['order' => 'asc', 'field' => 'created_at'])) }}">▼</a>
                         @endif
                     </th>
                     <th>編集</th>
@@ -56,7 +56,7 @@
                         <th>{{$product->id}}</th>
                         <th>{{$product->name}}</th>
                         <th>{{date_format($product->created_at,'Y/m/d')}}</th>
-                        <th>編集</th>
+                        <th><a href="{{route('adminEditerProduct',['id'=>$product->id])}}">編集</th>
                     </tr>
                 @endforeach
             </tbody>

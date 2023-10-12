@@ -6,6 +6,7 @@ use App\Http\Controllers\Web\UserRegisterController;
 use App\Http\Controllers\Web\CategoryListController;
 use App\Http\Controllers\Web\CategoryRegisterController;
 use App\Http\Controllers\Web\AdminProductListController;
+use App\Http\Controllers\Web\ProductRegisterController;
 use Illuminate\Support\Facades\Route;
 
 require __DIR__ . '/auth.php';
@@ -64,5 +65,19 @@ Route::middleware('admin.auth')->group(function () {
     // 削除処理
     Route::post('admin-detailCategory/{id}',[CategoryRegisterController::class, 'exeDeleteCategory'])->name('exeDeleteCategory');
     
+    // 商品登録画面を表示
+    Route::get('admin-registerProduct', [ProductRegisterController::class, 'adminRegisterProduct'])->name('adminRegisterProduct');
+    // サブカテゴリを取得
+    Route::get('admin-registerProduct/{key}',[ProductRegisterController::class, 'adminGetSub'])->name('adminGetSub');
+    // 画像ファイルを保存、パスの取得
+    Route::post('admin-upload',[ProductRegisterController::class, 'adminUpload'])->name('adminUpload');
+    // データを受け渡す
+    Route::post('admin-registerProduct', [ProductRegisterController::class, 'adminPostProduct'])->name('adminPostProduct');
+    // 確認画面を表示
+    Route::get('admin-registerProduct/confirm', [ProductRegisterController::class, 'adminProductConfirm'])->name('adminProductConfirm');
+    // 登録処理
+    Route::post('admin-registerProduct/confirm',[ProductRegisterController::class, 'exeProductRegister'])->name('exeProductRegister');
+    // 編集画面を表示
+    Route::get('admin-editerProduct/{id}', [ProductRegisterController::class, 'adminEditerProduct'])->name('adminEditerProduct');
 });
 

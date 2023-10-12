@@ -216,3 +216,35 @@ tbody{
 a{
     text-decoration: none;
 }
+
+.form-item.image .center {
+    margin-top: 10px;
+}
+
+.center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.center img {
+    max-width: 300px;
+    height: auto;
+}
+
+.center form {
+    width: 100%;
+}
+
+.center input[type="file"], .center button {
+    margin: 10px 0;
+}
+
+#upload1,#upload2,#upload3,#upload4 {
+    background-color: #e6c261; 
+    color: #FFF;              
+    padding: 2px 7px;       
+    border: none;            
+    border-radius: 5px;       
+    cursor: pointer;      
+}

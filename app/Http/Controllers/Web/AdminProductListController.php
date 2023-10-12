@@ -16,22 +16,20 @@ class adminProductListController extends Controller
     {
         // カテゴリの情報を取得
         $query=Product::query();
+        // 写真のセッションを破棄
+        $request->session()->forget('uploaded_paths');
 
+        // ソート条件の初期値
+        $sortField = 'id';
+        $sortOrder = 'desc';
 
-        // デフォルトの並び順
-        $query->orderBy('id','desc');
-
-         // IDでの順番切り替え
-         if($request->has('order')){
-            $order=$request->input('order')=='asc'?'asc':'desc';
-            $query->reorder()->orderBy('id',$order);
+        // ソート条件がリクエストで指定されている場合、それに基づいてクエリを更新
+        if ($request->has('order') && $request->has('field')) {
+            $sortField = $request->input('field');
+            $sortOrder = $request->input('order') == 'asc' ? 'asc' : 'desc';
         }
 
-        // 登録日時での順番切り替え
-        if($request->has('dateorder')){
-            $order=$request->input('dateorder')=='asc'?'asc':'desc';
-            $query->reorder()->orderBy('created_at',$order);
-        }
+        $query->orderBy($sortField, $sortOrder);
 
         // ID検索
         if($request->filled('search_id')){
@@ -51,13 +49,8 @@ class adminProductListController extends Controller
         $request->session()->put('search_id', $request->input('search_id'));
         $request->session()->put('search_freeword', $request->input('search_freeword'));
 
-        // ▲▼切り替えのため
-        $order=$request->input('order','desc');
-        $dateorder=$request->input('dateorder','desc');
-
         $products=$query->paginate(10);
 
-
-        return view('admin.productList',compact('products','order','dateorder'));
+        return view('admin.productList',compact('products', 'sortOrder', 'sortField'));
     }
 }

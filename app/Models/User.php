@@ -30,4 +30,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Review::class,'member_id');
     }
+    public function products()
+    {
+        return $this->hasMany(Product::class,'member_id');
+    }
 }

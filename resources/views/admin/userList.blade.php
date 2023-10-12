@@ -38,20 +38,20 @@
             <thead>
                 <tr>
                     <th>ID
-                        @if($order=='asc')
-                            <a href="{{route('userList',array_merge(request()->query(),['order'=>'desc'])) }}">▲</a>
+                        @if($sortOrder=='asc' && $sortField =='id')
+                            <a href="{{route('userList',array_merge(request()->query(),['order'=>'desc','field'=>'id'])) }}">▲</a>
                         @else
-                            <a href="{{route('userList',array_merge(request()->query(),['order'=>'asc'])) }}">▼</a>
+                            <a href="{{route('userList',array_merge(request()->query(),['order'=>'asc','field'=>'id'])) }}">▼</a>
                         @endif
                     </th>
                     <th>氏名</th>
                     <th>メールアドレス</th>
                     <th>性別</th>
                     <th>登録日時
-                        @if($dateorder=='asc')
-                            <a href="{{route('userList',array_merge(request()->query(),['dateorder'=>'desc']))}}">▲</a>
+                        @if($sortOrder=='asc' && $sortField =='created_at')
+                            <a href="{{route('userList',array_merge(request()->query(),['order'=>'desc','field'=>'created_at']))}}">▲</a>
                         @else
-                            <a href="{{route('userList',array_merge(request()->query(),['dateorder'=>'asc']))}}">▼</a>
+                            <a href="{{route('userList',array_merge(request()->query(),['order'=>'asc','field'=>'created_at']))}}">▼</a>
                         @endif
                     </th>
                     <th>編集</th>
