@@ -19,18 +19,6 @@ class UserListController extends Controller
         // ユーザーの情報を取得
         $query=User::query();
 
-        // // ソート条件の初期値
-        // $sortField='id';
-        // $sortOrder='desc';
-
-        // // リクエストに基づいてソートを指定
-        // if($request->has('order') && $request->has('field')){
-        //     $sortField=$request->input('field');
-        //     $sortOrder=$request->iinput('order')=='asc' ? 'asc' :'desc';
-        // }
-
-        // $query->orderBy($sortField,$sortOrder);
-
         // ソート条件の初期値
         $sortField = 'id';
         $sortOrder = 'desc';

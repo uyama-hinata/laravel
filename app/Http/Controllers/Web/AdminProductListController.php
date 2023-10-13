@@ -14,7 +14,7 @@ class adminProductListController extends Controller
      */
     public function adminProductList(Request $request)
     {
-        // カテゴリの情報を取得
+        // 商品の情報を取得
         $query=Product::query();
         // 写真のセッションを破棄
         $request->session()->forget('uploaded_paths');

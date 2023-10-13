@@ -39,7 +39,7 @@
                             <a href="{{ route('adminProductList', array_merge(request()->query(), ['order' => 'asc', 'field' => 'id'])) }}">▼</a>
                         @endif
                     </th>
-                    <th>商品大カテゴリ</th>
+                    <th>商品名</th>
                     <th>登録日時
                         @if ($sortOrder == 'asc' && $sortField == 'created_at')
                             <a href="{{ route('adminProductList', array_merge(request()->query(), ['order' => 'desc', 'field' => 'created_at'])) }}">▲</a>

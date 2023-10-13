@@ -111,28 +111,28 @@
                     
                 <div class="center">
                     <label>写真１</label>
-                    <div><img src="@if(empty($product->id)){{session('uploaded_paths.path_1') ? asset('storage/' . session('uploaded_paths.path_1')) : ''}}@else{{ asset('storage/' . $product->image_1) }}@endif" id="imageDisplay1" class="center"></div>
+                    <div><img src="@if(empty($product->id)){{session('uploaded_paths.path_1') ? asset('storage/' . session('uploaded_paths.path_1')) : ''}}@else{{ $product->image_1 ? asset('storage/' . $product->image_1) : (session('uploaded_paths.path_1') ? asset('storage/' . session('uploaded_paths.path_1')) : '') }}@endif" id="imageDisplay1" class="center"></div>
                     <div class="center"><input type="file" name="image_1" id ="image_1" ></div>
                     <div class="center"><button type="button" id="upload1">アップロード</button></div>
                 </div>
                 
                 <div class="center">
                     <label>写真２</label>
-                    <div><img src="@if(empty($product->id)){{session('uploaded_paths.path_2') ? asset('storage/' . session('uploaded_paths.path_2')) : ''}}}@else{{ asset('storage/' . $product->image_2) }}@endif" id="imageDisplay2" class="center"></div>
+                    <div><img src="@if(empty($product->id)){{session('uploaded_paths.path_2') ? asset('storage/' . session('uploaded_paths.path_2')) : ''}}@else{{ $product->image_2 ? asset('storage/' . $product->image_2) : (session('uploaded_paths.path_2') ? asset('storage/' . session('uploaded_paths.path_2')) : '') }}@endif" id="imageDisplay2" class="center"></div>
                     <div class="center"><input type="file" name="image_2" id ="image_2" ></div>
                     <div class="center"><button type="button" id="upload2">アップロード</button></div>
                 </div>
             
                 <div class="center">
                     <label>写真３</label>
-                    <div><img src="@if(empty($product->id)){{session('uploaded_paths.path_3') ? asset('storage/' . session('uploaded_paths.path_3')) : ''}}@else{{ asset('storage/' . $product->image_3) }}@endif" id="imageDisplay3" class="center"></div>
+                    <div><img src="@if(empty($product->id)){{session('uploaded_paths.path_3') ? asset('storage/' . session('uploaded_paths.path_3')) : ''}}@else{{ $product->image_3 ? asset('storage/' . $product->image_3) : (session('uploaded_paths.path_3') ? asset('storage/' . session('uploaded_paths.path_3')) : '') }}@endif" id="imageDisplay3" class="center"></div>
                     <div class="center"><input type="file" name="image_3" id ="image_3" ></div>
                     <div class="center"><button type="button" id="upload3">アップロード</button></div>
                 </div>
             
                 <div class="center">
                     <label>写真４</label>
-                    <div><img src="@if(empty($product->id)){{session('uploaded_paths.path_4') ? asset('storage/' . session('uploaded_paths.path_4')) : ''}}@else{{ asset('storage/' . $product->image_4) }}@endif" id="imageDisplay4" class="center"></div>
+                    <div><img src="@if(empty($product->id)){{session('uploaded_paths.path_4') ? asset('storage/' . session('uploaded_paths.path_4')) : ''}}@else{{ $product->image_4 ? asset('storage/' . $product->image_4) : (session('uploaded_paths.path_4') ? asset('storage/' . session('uploaded_paths.path_4')) : '') }}@endif" id="imageDisplay4" class="center"></div>
                     <div class="center"><input type="file" name="image_4" id ="image_4" ></div>
                     <div class="center"><button type="button" id="upload4">アップロード</button></div>
                 </div>

@@ -33,6 +33,7 @@
             <div class="form-item">
                 <label>会員:</label>
                 <div>{{$input['user_name']}}</div>
+                
             </div>
 
             <div class="form-item">
@@ -75,7 +76,12 @@
             </div>
 
 
-            <input type="submit" class="btn_next" value="商品を登録する">
+            @if(session('previous_page')=='register')
+                <input type="submit" class="ToList" value="登録完了">
+            @elseif(session('previous_page')=='editer')
+                <input type="submit" class="ToList" value="編集完了">
+            @endif  
+            
             <input type="submit" name="btn_back" class="btn_back" value="前に戻る">
             
         </form>

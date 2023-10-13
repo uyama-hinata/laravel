@@ -73,8 +73,6 @@ Route::middleware('admin.auth')->group(function () {
     Route::post('admin-upload',[ProductRegisterController::class, 'adminUpload'])->name('adminUpload');
     // データを受け渡す
     Route::post('admin-registerProduct', [ProductRegisterController::class, 'adminPostProduct'])->name('adminPostProduct');
-    // 確認画面を表示
-    Route::get('admin-registerProduct/confirm', [ProductRegisterController::class, 'adminProductConfirm'])->name('adminProductConfirm');
     // 登録処理
     Route::post('admin-registerProduct/confirm',[ProductRegisterController::class, 'exeProductRegister'])->name('exeProductRegister');
     // 編集画面を表示

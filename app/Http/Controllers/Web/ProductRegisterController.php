@@ -87,38 +87,49 @@ class ProductRegisterController extends Controller
     public function adminPostProduct(Request $request)
     {
         $request->validate([
+            'user_id'=>'required|exists:users,id',
             'product_name'=>'required|max:100',
             'product_category_id'=>'required|numeric|exists:product_categories,id',
             'product_subcategory_id'=>'required|exists:product_subcategories,id',
             'product_content'=>'required|max:500',
         ]);
-        
-        $input=$request->all();
-        $request->session()->put('register_input',$input);
-        // dd($request->session()->get('register_input')); // 追加
-        return redirect()->route('adminProductConfirm');
-    }
-    /**
-     * 確認画面を表示
-     */
-    public function adminProductConfirm(Request $request)
-    {
-        dd($request->session()->all()); 
-
-        // セッションから取り出す
-        $input=$request->session()->get('register_input');
 
         // 会員名を取得
-        $userName=User::find($input['user_id'])->name;
+        $user=User::find($request->user_id);
 
         // カテゴリとサブカテゴリの名前を取得
-        $categoryName=Product_category::find($input['product_category_id'])->name;
-        $subcategoryName=Product_subcategory::find($input['product_subcategory_id'])->name;
+        $categoryName=Product_category::find($request->product_category_id)->name;
+        $subcategoryName=Product_subcategory::find($request->product_subcategory_id)->name;
 
-        // 会員とカテゴリとサブカテゴリの名前をinputに入れる
-        $input['user_name']=$userName;
+        $input=$request->all();
+
+        // 会員(名前とID)とカテゴリとサブカテゴリの名前をinputに入れる
+        $input['product_name'] = $request->product_name;
+        $input['product_content'] = $request->product_content;
+        $input['user_name']=$user->name_sei . $user->name_mei;
+        $input['user_id']=$request->user_id ;
         $input['category_name']=$categoryName;
         $input['subcategory_name']=$subcategoryName;
+
+
+        // 編集画面から遷移時のため、$idをセッションから取り出す
+        $id=$request->session()->get('product_id');
+        $product=Product::find($id);
+        if (!$request->image_1) {
+            $request->session()->put('uploaded_paths.path_1',$product->image_1);
+        }
+        if(!$request->image_2){
+            $request->session()->put('uploaded_paths.path_2',$product->image_2);
+        }
+        if(!$request->image_3){
+            $request->session()->put('uploaded_paths.path_3',$product->image_3);
+        }
+        if(!$request->image_4){
+            $request->session()->put('uploaded_paths.path_4',$product->image_4);
+        }
+
+        // セッションに入れる
+        $request->session()->put('admin_register_input',$input);
 
         return view('admin.ProductConfirm',['input'=>$input]);
     }
@@ -128,7 +139,7 @@ class ProductRegisterController extends Controller
     public function exeProductRegister(Request $request)
     {
         // セッションから取り出す
-        $input=$request->session()->get('register_input');
+        $input=$request->session()->get('admin_register_input');
         $paths=$request->session()->get('uploaded_paths',[]);
 
         // 戻るボタン処理
@@ -150,11 +161,11 @@ class ProductRegisterController extends Controller
             $product=Product::find($input['id']); 
         }
 
-        // データベースに登録の処理
-        $product->member_id=auth()->id();
+        // 共通の部分
+        $product->member_id=$input['user_id'];
         $product->product_category_id=$input['product_category_id'];
         $product->product_subcategory_id=$input['product_subcategory_id'];
-        $product->name=$input['name'];
+        $product->name=$input['product_name'];
         if(isset($paths['path_1'])){$product->image_1=$paths['path_1'];}
         if(isset($paths['path_2'])){$product->image_2=$paths['path_2'];}
         if(isset($paths['path_3'])){$product->image_3=$paths['path_3'];}
@@ -179,6 +190,9 @@ class ProductRegisterController extends Controller
 
         // セッションに現在の画面場所を保存
         $request->session()->put('previous_page','editer');
+
+        // セッションに$idを保存
+        $request->session()->put('product_id',$id);
 
         return view('admin.RegisterEditerProduct',compact('product','users','categories','subcategories'));
     }
