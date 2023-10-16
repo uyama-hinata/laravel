@@ -77,5 +77,9 @@ Route::middleware('admin.auth')->group(function () {
     Route::post('admin-registerProduct/confirm',[ProductRegisterController::class, 'exeProductRegister'])->name('exeProductRegister');
     // 編集画面を表示
     Route::get('admin-editerProduct/{id}', [ProductRegisterController::class, 'adminEditerProduct'])->name('adminEditerProduct');
+    // 詳細画面を表示
+    Route::get('admin-detailProduct/{id}', [ProductRegisterController::class, 'adminDetailProduct'])->name('adminDetailProduct');
+    // 削除処理
+    Route::post('admin-detailProduct/{id}',[ProductRegisterController::class, 'exeDeleteProduct'])->name('exeDeleteProduct');
 });
 

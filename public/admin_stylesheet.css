@@ -248,3 +248,33 @@ a{
     border-radius: 5px;       
     cursor: pointer;      
 }
+
+.detail-image{
+    display: flex;
+    flex-direction: column;
+    margin-left: 120px;
+}
+
+.detail-image img {
+    max-width: 300px;
+    height: auto;
+}
+
+.form-itemReview{
+    text-align: center;
+    background-color: #bad4f0;
+}
+
+.detail-reviewId{
+    border-top: 1px solid #bad4f0;
+}
+
+.detail-reviewComment{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.toReview_link{
+    margin-left: auto;
+}

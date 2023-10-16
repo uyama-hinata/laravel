@@ -48,15 +48,17 @@
                         @endif
                     </th>
                     <th>編集</th>
+                    <th>詳細</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($products as $product)
                     <tr>
                         <th>{{$product->id}}</th>
-                        <th>{{$product->name}}</th>
+                        <th><a href="{{route('adminDetailProduct',['id'=>$product->id])}}">{{$product->name}}</a></th>
                         <th>{{date_format($product->created_at,'Y/m/d')}}</th>
-                        <th><a href="{{route('adminEditerProduct',['id'=>$product->id])}}">編集</th>
+                        <th><a href="{{route('adminEditerProduct',['id'=>$product->id])}}">編集</a></th>
+                        <th><a href="{{route('adminDetailProduct',['id'=>$product->id])}}">詳細</a></th>
                     </tr>
                 @endforeach
             </tbody>

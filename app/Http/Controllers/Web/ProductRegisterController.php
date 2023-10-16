@@ -196,4 +196,28 @@ class ProductRegisterController extends Controller
 
         return view('admin.RegisterEditerProduct',compact('product','users','categories','subcategories'));
     }
+    /**
+     * 詳細画面を表示
+     */
+    public function adminDetailProduct($id,Request $request)
+    {
+        $product=Product::find($id);
+        $reviews=$product->reviews()->paginate(3);
+        $averageEvaluation=intval($product->reviews->avg('evaluation'));
+
+        return view('admin.detailProduct', compact('product','reviews','averageEvaluation'));
+    }
+    /**
+     * 削除処理
+     */
+    public function exeDeleteProduct($id)
+    {
+        $product=Product::find($id);
+
+        $product->reviews()->delete();
+        
+        $product->delete();
+
+        return redirect()->route('adminProductList');
+    }
 }
