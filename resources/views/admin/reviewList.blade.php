@@ -9,7 +9,7 @@
     <header>
         <div class="header_main_msg">レビュー一覧</div>
         
-
+        <a href="{{route('adminRegisterReview')}}" class="toTop_btn">商品レビュー登録</a>
         <a href="{{route('adminTop')}}" class="toTop_btn">トップへ戻る</a>
        
     </header>
@@ -61,7 +61,7 @@
                         <th>{{$review->evaluation}}</th>
                         <th>{{$review->comment}}</th>
                         <th>{{date_format($review->created_at,'Y/m/d')}}</th>
-                        <th>編集</th>
+                        <th><a href="{{route('adminEditerReview',['id'=>$review->id])}}">編集</a></th>
                         <th>詳細</th>
                     </tr>
                 @endforeach

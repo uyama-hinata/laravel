@@ -8,6 +8,7 @@ use App\Http\Controllers\Web\CategoryRegisterController;
 use App\Http\Controllers\Web\AdminProductListController;
 use App\Http\Controllers\Web\ProductRegisterController;
 use App\Http\Controllers\Web\ReviewListController;
+use App\Http\Controllers\Web\ReviewRegisterController;
 use Illuminate\Support\Facades\Route;
 
 require __DIR__ . '/auth.php';
@@ -74,7 +75,7 @@ Route::middleware('admin.auth')->group(function () {
     Route::get('admin-registerProduct/{key}',[ProductRegisterController::class, 'adminGetSub'])->name('adminGetSub');
     // 画像ファイルを保存、パスの取得
     Route::post('admin-upload',[ProductRegisterController::class, 'adminUpload'])->name('adminUpload');
-    // データを受け渡す
+    // データを受け渡して確認画面を表示
     Route::post('admin-registerProduct', [ProductRegisterController::class, 'adminPostProduct'])->name('adminPostProduct');
     // 登録処理
     Route::post('admin-registerProduct/confirm',[ProductRegisterController::class, 'exeProductRegister'])->name('exeProductRegister');
@@ -84,5 +85,14 @@ Route::middleware('admin.auth')->group(function () {
     Route::get('admin-detailProduct/{id}', [ProductRegisterController::class, 'adminDetailProduct'])->name('adminDetailProduct');
     // 削除処理
     Route::post('admin-detailProduct/{id}',[ProductRegisterController::class, 'exeDeleteProduct'])->name('exeDeleteProduct');
+
+    // レビュー登録画面を表示
+    Route::get('admin-registerReview', [ReviewRegisterController::class, 'adminRegisterReview'])->name('adminRegisterReview');
+    // データを受け渡して確認画面を表示
+    Route::post('admin-registerReview', [ReviewRegisterController::class, 'adminPostReview'])->name('adminPostReview');
+    // 登録処理
+    Route::post('admin-registerReview/confirm',[ReviewRegisterController::class, 'exeReviewRegister'])->name('exeReviewRegister');
+    // 編集画面を表示
+    Route::get('admin-editerReview/{id}', [ReviewRegisterController::class, 'adminEditerReview'])->name('adminEditerReview');
 });
 

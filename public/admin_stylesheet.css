@@ -278,3 +278,24 @@ a{
 .toReview_link{
     margin-left: auto;
 }
+
+.container {
+    display: flex;
+    align-items: flex-start; 
+    border-bottom: 1px solid #5a5c5c;
+    margin-bottom: 20px;
+}
+
+.confirm-image {
+    flex-basis: 50%; 
+}
+
+.confirm-info {
+    flex-basis: 50%;
+    padding-left: 20px; 
+}
+
+img{
+    max-width: 300px;
+    height: auto;
+}
