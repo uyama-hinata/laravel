@@ -36,7 +36,7 @@
                 商品ID　@if($product){{$product->id}}@endif <br>
                 会員　@if($product->user){{$product->user->name_sei}}{{$product->user->name_mei}}@endif <br>
                 @if($product){{$product->name}}@endif <br>
-                総合評価　@if($product){{$averageEvaluation}}@endif <br>
+                総合評価　@if($product)@for ($i=0;$i<$averageEvaluation;$i++)★ @endfor{{$averageEvaluation}}@endif <br>
             </div>
         </div>
 

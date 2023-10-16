@@ -94,5 +94,9 @@ Route::middleware('admin.auth')->group(function () {
     Route::post('admin-registerReview/confirm',[ReviewRegisterController::class, 'exeReviewRegister'])->name('exeReviewRegister');
     // 編集画面を表示
     Route::get('admin-editerReview/{id}', [ReviewRegisterController::class, 'adminEditerReview'])->name('adminEditerReview');
+    // 詳細画面を表示
+    Route::get('admin-detailReview/{id}', [ReviewRegisterController::class, 'adminDetailReview'])->name('adminDetailReview');
+    // 削除処理
+    Route::post('admin-detailReview/{id}',[ReviewRegisterController::class, 'exeDeleteReview'])->name('exeDeleteReview');
 });
 

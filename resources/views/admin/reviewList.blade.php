@@ -59,10 +59,10 @@
                         <th>{{$review->id}}</th>
                         <th>{{$review->product->id}}</th>
                         <th>{{$review->evaluation}}</th>
-                        <th>{{$review->comment}}</th>
+                        <th><a href="{{route('adminDetailReview',['id'=> $review->id])}}">{{$review->comment}}</a></th>
                         <th>{{date_format($review->created_at,'Y/m/d')}}</th>
                         <th><a href="{{route('adminEditerReview',['id'=>$review->id])}}">編集</a></th>
-                        <th>詳細</th>
+                        <th><a href="{{route('adminDetailReview',['id'=> $review->id])}}">詳細</a></th>
                     </tr>
                 @endforeach
             </tbody>

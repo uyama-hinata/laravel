@@ -112,5 +112,28 @@ class ReviewRegisterController extends Controller
 
         return view('admin.RegisterEditerReview',compact('review','products','users'));
     }
-    
+    /**
+     * 詳細画面を表示
+     */
+    public function adminDetailReview($id,Request $request)
+    {
+        $review=Review::find($id);
+
+        // 総合評価
+        $product =$review->product;
+        $averageEvaluation=intval($product->reviews->avg('evaluation'));
+
+        return view('admin.detailReview', compact('review','averageEvaluation'));
+    }
+    /**
+     * 削除処理
+     */
+    public function exeDeleteReview($id)
+    {
+        $review=Review::find($id);
+
+        $review->delete();
+
+        return redirect()->route('adminReviewList');
+    }
 }
